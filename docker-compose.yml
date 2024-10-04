@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  # Backend Symfony
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: symfony_app
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - SYMFONY_ENV=dev
+
+  # Frontend Storefront (Next.js)
+  storefront:
+    build:
+      context: ./storefront
+      dockerfile: Dockerfile
+    container_name: storefront_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./storefront:/usr/src/app
+    environment:
+      - NODE_ENV=development
+
+  # Frontend Admin (Next.js)
+  admin:
+    build:
+      context: ./admin-front
+      dockerfile: Dockerfile
+    container_name: admin_app
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./admin-front:/usr/src/app
+    environment:
+      - NODE_ENV=development
+
+  # MySQL Database
+  db:
+    image: mysql:5.7
+    container_name: mysql_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ecommerce
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  # Nginx Proxy
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    container_name: nginx_proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - storefront
+      - admin
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+
+volumes:
+  db_data:
