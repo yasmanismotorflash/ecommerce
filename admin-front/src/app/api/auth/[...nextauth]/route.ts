@@ -11,15 +11,23 @@ const authOptions: NextAuthOptions = {
                 email: { label: 'Email', type: 'email' },
                 password: { label: 'Password', type: 'password' },
             },
-            async authorize(credentials: { email?: string; password?: string }) {
-                const user = { id: 1, name: 'Admin', email: credentials?.email };
-
-                if (credentials?.email === 'admin@example.com' && credentials?.password === 'password') {
-                    return user;
+            async authorize(credentials) {
+                // Verifica si las credenciales están definidas
+                if (!credentials) {
+                    return null;  // Si no hay credenciales, retorna null (no autorizado)
                 }
-                return null;
-            },
-        }),
+
+                // Simula un usuario con `id` como una cadena
+                const user = { id: '1', name: 'Admin', email: credentials.email };
+
+                // Verifica las credenciales
+                if (credentials.email === 'admin@example.com' && credentials.password === 'password') {
+                    return user;  // Retorna el usuario si las credenciales coinciden
+                }
+
+                return null;  // Si las credenciales no son correctas, retorna null
+            }
+        })
     ],
     pages: {
         signIn: '/admin/login',

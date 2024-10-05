@@ -1,0 +1,5 @@
+{
+  "welcomeMessage": "Bienvenido al panel de administración",
+  "manageUsers": "Gestión de Usuarios",
+  "usersPath": "/es/admin/usuarios"
+}

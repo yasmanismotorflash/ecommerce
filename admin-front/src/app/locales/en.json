@@ -1,0 +1,5 @@
+{
+  "welcomeMessage": "Welcome to the admin dashboard",
+  "manageUsers": "Manage Users",
+  "usersPath": "/en/admin/users"
+}

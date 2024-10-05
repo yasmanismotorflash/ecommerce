@@ -5,16 +5,20 @@ import type { NextRequest } from 'next/server';
 export async function middleware(req: NextRequest) {
     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
-    // Si no hay token, redirige al login
     if (!token) {
         return NextResponse.redirect(new URL('/admin/login', req.url));
     }
 
-    // Si el token es válido, permite el acceso
+    // Verifica el rol
+    if (req.nextUrl.pathname.startsWith('/admin/users')) {
+        if (token.role !== 'admin') {
+            return NextResponse.redirect(new URL('/admin/unauthorized', req.url));
+        }
+    }
+
     return NextResponse.next();
 }
 
-// Aplica el middleware a las rutas bajo /admin
 export const config = {
     matcher: ['/admin/:path*'],
 };
