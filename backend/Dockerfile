@@ -15,9 +15,6 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Custom php.ini configuration
-COPY ./docker/php/php.ini /usr/local/etc/php/
-
 # Set working directory
 WORKDIR /var/www/html
 
