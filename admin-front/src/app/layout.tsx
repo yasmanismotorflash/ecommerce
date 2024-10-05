@@ -1,21 +1,22 @@
 "use client";
 
 import { SessionProvider } from 'next-auth/react';
+import { LanguageProvider } from './context/LanguageContext';  // Importa el proveedor de idioma
 
 export default function RootLayout({
                                        children,
-                                       params
+                                       params,
                                    }: {
     children: React.ReactNode;
-    params: { locale: string };  // Obtenemos el idioma desde los parámetros de la ruta
+    params: { locale: string };
 }) {
-    const { locale } = params || { locale: 'en' };  // Usa 'en' como valor por defecto si no hay locale
-
     return (
-        <html lang={locale}>
+        <html lang={params.locale}>
         <body>
         <SessionProvider>
-            {children}
+            <LanguageProvider>
+                {children}
+            </LanguageProvider>
         </SessionProvider>
         </body>
         </html>

@@ -1,6 +1,7 @@
+// next.config.mjs
 export default {
     i18n: {
-        locales: ['en', 'es'],
-        defaultLocale: 'en'
-    },
-}
+        locales: ['en', 'es', 'fr'],  // Idiomas soportados
+        defaultLocale: 'en',          // Idioma predeterminado
+    }
+};

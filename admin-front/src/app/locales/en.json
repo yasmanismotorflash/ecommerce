@@ -2,5 +2,8 @@
   "loading": "Loading...",
   "welcomeMessage": "Welcome",
   "adminDashboard": "This is the admin dashboard.",
+  "manageUsers": "Users List",
+
+
   "usersPath": "/en/admin/users"
 }

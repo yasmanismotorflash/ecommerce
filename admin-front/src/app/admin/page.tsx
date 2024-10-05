@@ -3,15 +3,12 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useTranslation } from '../hooks/useTranslation';
-import LanguageSwitcher from '../components/LanguageSwitcher';
+import { useLanguage } from '../context/LanguageContext';  // Importa el hook de idioma
 
 export default function AdminPage() {
     const { data: session, status } = useSession();
     const router = useRouter();
-
-    const locale = 'en';  // Puedes obtener el valor dinámicamente del contexto de idioma o desde el router
-    const translations = useTranslation(locale);
+    const { locale } = useLanguage();  // Obtiene el idioma desde el contexto
 
     useEffect(() => {
         if (status === 'unauthenticated') {
@@ -20,19 +17,17 @@ export default function AdminPage() {
     }, [status, router, locale]);
 
     if (status === 'loading') {
-        return <p>{translations.loading}</p>;  // Muestra mensaje de carga según el idioma
+        return <p>Loading...</p>;
     }
 
     if (!session) {
-        return null;  // Si no hay sesión, no muestra contenido mientras se redirige
+        return null;
     }
 
     return (
         <div>
-            <LanguageSwitcher />  {/* Agrega el componente para cambiar el idioma */}
-            <h1>{translations.welcomeMessage}, {session.user?.name}</h1>
-            <p>{translations.adminDashboard}</p>
+            <h1>Welcome, {session.user?.name}</h1>
+            <p>This is the admin dashboard for {locale} locale.</p>
         </div>
     );
 }
-
