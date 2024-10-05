@@ -1,8 +1,15 @@
-export default function HomePage() {
-  return (
-      <div>
-        <h1>Welcome to the Home Page</h1>
-        <p>This is the landing page of your application.</p>
-      </div>
-  );
+"use client";
+
+import { useTranslation } from './hooks/useTranslation';
+
+export default function HomePage({ params }: { params: { locale: string } }) {
+    const { locale } = params || { locale: 'en' };  // Define el idioma por defecto como 'en'
+    const translations = useTranslation(locale);  // Carga las traducciones
+
+    return (
+        <div>
+            <h1>{translations.welcomeMessage}</h1>
+            <p>{translations.homePageDescription}</p>
+        </div>
+    );
 }

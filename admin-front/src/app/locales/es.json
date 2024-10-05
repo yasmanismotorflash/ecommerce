@@ -1,5 +1,6 @@
 {
-  "welcomeMessage": "Bienvenido al panel de administración",
-  "manageUsers": "Gestión de Usuarios",
+  "loading": "Cargando...",
+  "welcomeMessage": "Bienvenido",
+  "adminDashboard": "Este es el panel de administración.",
   "usersPath": "/es/admin/usuarios"
 }
