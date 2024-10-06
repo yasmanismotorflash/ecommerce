@@ -1,27 +1,38 @@
-"use client";
+'use client';
 
 import { useRouter, usePathname } from 'next/navigation';
-import { useParams } from 'next/navigation';
 
-const LanguageSwitcher = () => {
+interface LanguageSwitcherProps {
+    locales: string[];  // Lista de idiomas obtenidos dinámicamente
+}
+
+const LanguageSwitcher = ({ locales }: LanguageSwitcherProps) => {
     const router = useRouter();
     const pathname = usePathname();  // Obtiene la ruta actual
-    const params = useParams();      // Obtiene los parámetros de la ruta
 
     const changeLanguage = (lang: string) => {
-        // Elimina el prefijo de idioma actual
-        const currentLocale = params.locale || 'en';
-        const newPathname = pathname.replace(`/${currentLocale}`, '');
+        const segments = pathname.split('/').filter(Boolean);  // Filtra segmentos vacíos
 
-        // Navega a la ruta con el nuevo idioma
-        router.push(`/${lang}${newPathname}`);
+        // Verifica si el primer segmento es un idioma
+        if (locales.includes(segments[0])) {
+            segments[0] = lang;  // Reemplaza el idioma actual con el nuevo
+        } else {
+            segments.unshift(lang);  // Si no hay idioma en la ruta, lo agrega al inicio
+        }
+
+        const newPathname = '/' + segments.join('/');
+
+        // Navega a la nueva ruta con el idioma seleccionado
+        router.push(newPathname);
     };
 
     return (
         <div>
-            <button onClick={() => changeLanguage('en')}>English</button>
-            <button onClick={() => changeLanguage('es')}>Español</button>
-            <button onClick={() => changeLanguage('fr')}>Français</button>
+            {locales.map((locale) => (
+                <button key={locale} onClick={() => changeLanguage(locale)}>
+                    {locale.toUpperCase()}
+                </button>
+            ))}
         </div>
     );
 };

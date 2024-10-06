@@ -2,7 +2,26 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { NextAuthOptions } from 'next-auth';
 
+// Extiende el tipo de `session.user` para incluir la propiedad `id`
+declare module 'next-auth' {
+    interface Session {
+        user: {
+            id: string;  // Añadimos la propiedad `id`
+            name?: string | null;
+            email?: string | null;
+            image?: string | null;
+        }
+    }
+}
+
 const authOptions: NextAuthOptions = {
+    secret: process.env.NEXTAUTH_SECRET,
+    session: {
+        strategy: 'jwt',
+    },
+    jwt: {
+        secret: process.env.NEXTAUTH_SECRET,
+    },
     providers: [
         CredentialsProvider({
             id: 'credentials',
@@ -12,25 +31,33 @@ const authOptions: NextAuthOptions = {
                 password: { label: 'Password', type: 'password' },
             },
             async authorize(credentials) {
-                // Verifica si las credenciales están definidas
                 if (!credentials) {
-                    return null;  // Si no hay credenciales, retorna null (no autorizado)
+                    return null;
                 }
-
-                // Simula un usuario con `id` como una cadena
                 const user = { id: '1', name: 'Admin', email: credentials.email };
-
-                // Verifica las credenciales
                 if (credentials.email === 'admin@example.com' && credentials.password === 'password') {
-                    return user;  // Retorna el usuario si las credenciales coinciden
+                    return user;
                 }
-
-                return null;  // Si las credenciales no son correctas, retorna null
+                return null;
             }
         })
     ],
     pages: {
         signIn: '/admin/login',
+    },
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.id = user.id;
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            if (session?.user && token?.id) {
+                session.user.id = token.id as string;  // Añadimos el id de token a session.user
+            }
+            return session;
+        },
     },
 };
 
