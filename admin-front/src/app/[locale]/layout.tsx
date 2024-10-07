@@ -1,28 +1,15 @@
-// "use client";
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-// import { SessionProvider } from 'next-auth/react';
+// LocaleLayout.tsx (Componente Principal)
+import LocaleLayoutServer from './LocaleLayoutServer';
+import LocaleLayoutClient from './LocaleLayoutClient';
 
-export default async function LocaleLayout({
-  children,
-  params: { locale },  
-}: {
-  children: React.ReactNode;
-  params: { locale: string };  
+export default async function LocaleLayout({ 
+  children, 
+  params: { locale } 
+}: { 
+  children: React.ReactNode; 
+  params: { locale: string } 
 }) {
-  
-  const messages = await getMessages(); 
+  const messages = await LocaleLayoutServer({ params: { locale } }); 
 
-  return (
-    <html lang={locale}>
-      <body>
-        {/* <SessionProvider> */}
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
-        {/* </SessionProvider> */}
-      </body>
-    </html>
-  );
+  return <LocaleLayoutClient messages={messages} locale={locale}>{children}</LocaleLayoutClient>; 
 }
-
