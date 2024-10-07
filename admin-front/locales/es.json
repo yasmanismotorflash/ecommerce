@@ -1,0 +1,10 @@
+{
+  "HomePage": {
+    "title": "Hola mundo"
+  },
+  "AdminPage":{
+    "title": "Bienvendio {name}",
+    "message": "Este es el panel de administración para la configuración regional {locale}"
+
+  }
+}

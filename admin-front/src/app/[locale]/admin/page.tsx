@@ -1,14 +1,16 @@
 "use client";
 
+import { useTranslations } from 'next-intl';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useLanguage } from '../context/LanguageContext';  // Importa el hook de idioma
+import { routing } from '../../../i18n/routing';
 
 export default function AdminPage() {
+    const t = useTranslations('AdminPage');
     const { data: session, status } = useSession();
     const router = useRouter();
-    const { locale } = useLanguage();  // Obtiene el idioma desde el contexto
+    const locale = routing.locales;  // Obtiene el idioma desde el contexto
 
     useEffect(() => {
         if (status === 'unauthenticated') {
@@ -17,17 +19,17 @@ export default function AdminPage() {
     }, [status, router, locale]);
 
     if (status === 'loading') {
-        return <p>Loading...</p>;
+       return <p>Loading...</p>;
     }
 
     if (!session) {
         return null;
     }
-
     return (
         <div>
-            <h1>Welcome, {session.user?.name}</h1>
-            <p>This is the admin dashboard for {locale} locale.</p>
+            <h1>{t('title', { name:  session.user?.name  })}</h1>
+            <p>{t('message', { locale: locale })}</p>
         </div>
     );
+
 }

@@ -1,9 +1,0 @@
-{
-  "loading": "Cargando...",
-  "welcomeMessage": "Bienvenido",
-  "adminDashboard": "Este es el panel de administración.",
-  "manageUsers": "Listado de Usuarios",
-
-
-  "usersPath": "/es/admin/usuarios"
-}
