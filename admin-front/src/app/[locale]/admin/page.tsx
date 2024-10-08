@@ -1,17 +1,16 @@
 "use client"
 import { useTranslations } from 'next-intl';
 import { useSession } from 'next-auth/react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import {useLocale} from 'next-intl';
+
 
 export default function AdminPage() {
     const t = useTranslations('AdminPage');
     const { data: session, status } = useSession();
     const router = useRouter();
-        // Extraer el locale desde el pathname
-        const pathname = usePathname() // Obtiene el path completo
-        const locale = pathname.split('/')[1]; // Asumiendo que el idioma está en la primera parte de la ruta
-    
+    const locale = useLocale();
 
     useEffect(() => {
         

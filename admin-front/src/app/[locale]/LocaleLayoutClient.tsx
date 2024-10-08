@@ -1,9 +1,9 @@
-// LocaleLayoutClient.tsx (Componente de Cliente)
-"use client"; 
+"use client";
 
 import { NextIntlClientProvider } from 'next-intl';
 import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
+
 
 export default function LocaleLayoutClient({
   children,

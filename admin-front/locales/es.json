@@ -7,7 +7,7 @@
     "message": "Este es el panel de administración para la configuración regional {locale}"
 
   },
-  "UserPage": {
+  "UsersPage": {
     "title": "Listado de Usuarios"
   }
 }

@@ -1,6 +1,7 @@
 // LocaleLayout.tsx (Componente Principal)
 import LocaleLayoutServer from './LocaleLayoutServer';
 import LocaleLayoutClient from './LocaleLayoutClient';
+import "./globals.css";
 
 export default async function LocaleLayout({ 
   children, 

@@ -1,16 +1,10 @@
-// next.config.mjs
-// export default {
-//     i18n: {
-//         locales: ['en', 'es', 'fr'],  // Idiomas soportados
-//         defaultLocale: 'en',          // Idioma predeterminado
-//     }
-// };
-
 import createNextIntlPlugin from 'next-intl/plugin';
  
 const withNextIntl = createNextIntlPlugin();
  
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    transpilePackages: ['mf-front'],  // Para permitir que Next.js procese el paquete
+};
  
 export default withNextIntl(nextConfig);
