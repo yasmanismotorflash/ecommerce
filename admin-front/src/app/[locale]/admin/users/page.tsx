@@ -5,7 +5,7 @@ export default function UsersPage() {
 
     return (
         <div>
-             <h1>{t("title")}</h1>
+             <h1>{t("HomePage.title")}</h1>
         </div>
     );
 }
