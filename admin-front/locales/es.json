@@ -6,5 +6,8 @@
     "title": "Bienvendio {name}",
     "message": "Este es el panel de administración para la configuración regional {locale}"
 
+  },
+  "UserPage": {
+    "title": "Listado de Usuarios"
   }
 }

@@ -8,5 +8,8 @@
     "title": "Welcome, {name}",
     "message": "This is the admin dashboard for {locale} locale"
 
+  },
+  "UserPage": {
+    "title": "Users List"
   }
 }
