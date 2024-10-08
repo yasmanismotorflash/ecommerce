@@ -4,16 +4,22 @@ import { useTranslations } from 'next-intl';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { routing } from '../../../i18n/routing';
+// import { routing } from '../../../i18n/routing';
 
 export default function AdminPage() {
     const t = useTranslations('AdminPage');
     const { data: session, status } = useSession();
     const router = useRouter();
-    const locale = routing.locales;  // Obtiene el idioma desde el contexto
+    // Obtener el idioma de la URL actual
+    const locale = window.location.pathname.split('/')[1]; // Esto asume que la estructura es /[locale]/admin...
+
 
     useEffect(() => {
+        console.log('true')
+            console.log(locale)
+            
         if (status === 'unauthenticated') {
+            
             router.push(`/${locale}/admin/login`);  // Redirige teniendo en cuenta el idioma
         }
     }, [status, router, locale]);
