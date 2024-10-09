@@ -1,8 +1,9 @@
 "use client";
 
-import { NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider, AbstractIntlMessages } from 'next-intl';
 import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
+
 
 
 export default function LocaleLayoutClient({
@@ -11,7 +12,7 @@ export default function LocaleLayoutClient({
   locale,
 }: {
   children: ReactNode;
-  messages: Record<string, any>;
+  messages:  Record<string, string | AbstractIntlMessages>;
   locale: string; 
 }) {
   return (
