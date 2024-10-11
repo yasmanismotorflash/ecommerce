@@ -53,6 +53,8 @@ Para que los dominios locales **storefront.local** y **admin.local** funcionen, 
 ```
 127.0.0.1 storefront.local
 127.0.0.1 admin.local
+127.0.0.1 backend.local
+
 ```
 
 ### 3. Construir y Levantar los Contenedores

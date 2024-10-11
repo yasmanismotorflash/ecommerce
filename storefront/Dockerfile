@@ -1,5 +1,5 @@
 # Use Node.js LTS as the base image
-FROM node:18-alpine
+FROM node:20.18
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
@@ -11,6 +11,7 @@ COPY package*.json ./
 COPY . .
 
 # Build the Next.js app (if applicable)
+RUN npm install
 RUN npm run build
 
 # Expose port 3000
