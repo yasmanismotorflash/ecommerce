@@ -1,7 +1,13 @@
-// next.config.mjs
-export default {
-    i18n: {
-        locales: ['en', 'es', 'fr'],  // Idiomas soportados
-        defaultLocale: 'en',          // Idioma predeterminado
+import createNextIntlPlugin from 'next-intl/plugin';
+ 
+const withNextIntl = createNextIntlPlugin();
+ 
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    transpilePackages: ['mf-front'], 
+    images: {
+        domains: ['images.motorflash.com']
     }
 };
+ 
+export default withNextIntl(nextConfig);
