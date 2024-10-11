@@ -12,7 +12,6 @@ import {
 import RenderTableHeader from "./RenderTableHeader";
 import RenderTableRow from "./RenderTableRow";
 import DialogDetails from "../DialogDetails/DialogDetails";
-import { fetchDetailsData } from "@/controllers/dataFetching";
 
 
 

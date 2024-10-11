@@ -5,7 +5,7 @@ import {
 	PaginationLink,
     PaginationNext,
     PaginationPrevious,
-  } from "@/components/ui/pagination";
+  } from "../../ui/pagination";
 import useStore from "@/store/store";
 import { useEffect } from "react";
 import { useRouter } from 'next/navigation';
