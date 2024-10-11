@@ -1,7 +1,7 @@
 import React from 'react';
-import { cn } from '../../lib/utils';
+import { cn } from '../../../lib/utils';
 
-export function Container({
+export function MfContainer({
     children,
     className,
     ...props

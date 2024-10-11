@@ -1,8 +1,8 @@
 import React from 'react';
-import { cn } from '../../lib/utils';
-import { Container } from './container';
+import { cn } from '../../../lib/utils';
+import { MfContainer } from './container';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface MfInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     value?: string;
     placeholder?: string;
@@ -15,7 +15,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     onChange?: () => void;
 }
 
-const Input: React.FC<InputProps> = ({
+const MfInput: React.FC<MfInputProps> = ({
     label,
     value,
     placeholder,
@@ -28,7 +28,7 @@ const Input: React.FC<InputProps> = ({
     onChange,
 })=>{
     return(
-        <Container>
+        <MfContainer>
         {label && <label htmlFor={id} className="block text-sm font-bold text-gray-700">{label}</label>}
         <input
             
@@ -42,8 +42,8 @@ const Input: React.FC<InputProps> = ({
             onChange={onChange}
         />
         { error && <label htmlFor={id} className="block text-xs font-bold  text-red-500">{error}</label> }
-        </Container>
+        </MfContainer>
     )
 }
 
-export default Input;
+export default MfInput;

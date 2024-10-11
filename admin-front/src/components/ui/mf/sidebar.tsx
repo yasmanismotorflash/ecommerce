@@ -6,36 +6,36 @@ import Button from './button';
 // Interfaces para las props de los componentes
 
 
-export interface SidebarFooterProps {
+export interface MfSidebarFooterProps {
     className?: string;
     text: string
 }
 
-export interface SidebarTitleProps {
+export interface MfSidebarTitleProps {
     title: string;
     className?: string;
 }
 
-export interface SidebarMenuItemProps {
+export interface MfSidebarMenuItemProps {
     href: string;
     icon: JSX.Element;
     children: ReactNode;
     className?: string;
 }
 
-export interface SidebarDropdownProps {
+export interface MfSidebarDropdownProps {
     title: string;
     icon: JSX.Element;
     children: ReactNode;
     className?: string;
 }
 
-export interface SidebarContentProps {
+export interface MfSidebarContentProps {
     isOpen: boolean;
 }
 
 // Componente para el pie de página
-const SidebarFooter: React.FC<SidebarFooterProps> = ({ className, text }) => {
+const MfSidebarFooter: React.FC<MfSidebarFooterProps> = ({ className, text }) => {
     return (
         <div className={`py-4 text-center ${className}`}>
             <p className="text-gray-500 dark:text-gray-400">{text}</p>
@@ -44,7 +44,7 @@ const SidebarFooter: React.FC<SidebarFooterProps> = ({ className, text }) => {
 };
 
 // Componente para el título del sidebar
-const SidebarTitle: React.FC<SidebarTitleProps> = ({ title, className }) => {
+const MfSidebarTitle: React.FC<MfSidebarTitleProps> = ({ title, className }) => {
     return (
         <h2 className={`text-lg font-bold ${className}`}>
             {title}
@@ -53,7 +53,7 @@ const SidebarTitle: React.FC<SidebarTitleProps> = ({ title, className }) => {
 };
 
 // Componente para el item del menú
-const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({ href, icon, children, className }) => {
+const MfSidebarMenuItem: React.FC<MfSidebarMenuItemProps> = ({ href, icon, children, className }) => {
     return (
         <li>
             <a
@@ -68,7 +68,7 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({ href, icon, children,
 };
 
 // Componente para el menú desplegable
-const SidebarDropdown: React.FC<SidebarDropdownProps> = ({ title, icon, children, className }) => {
+const MfSidebarDropdown: React.FC<MfSidebarDropdownProps> = ({ title, icon, children, className }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -93,41 +93,41 @@ const SidebarDropdown: React.FC<SidebarDropdownProps> = ({ title, icon, children
 };
 
 // Componente principal del sidebar
-const SidebarContent: React.FC<SidebarContentProps> = ({ isOpen }) => {
+const MfSidebarContent: React.FC<MfSidebarContentProps> = ({ isOpen }) => {
     return (
         <aside
         id="sidebar-multi-level-sidebar"
         className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}
-        aria-label="Sidebar"
+        aria-label="MfSidebar"
         >   
         
             <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-                <SidebarTitle title="Menu" />
+                <MfSidebarTitle title="Menu" />
                 <ul className="space-y-2 font-medium">
-                    <SidebarDropdown title="Formularios" icon={
+                    <MfSidebarDropdown title="Formularios" icon={
                         <ListBulletIcon className='size-6' />
                     }>
-                        <SidebarMenuItem href="#" icon={
+                        <MfSidebarMenuItem href="#" icon={
                             <PlusCircledIcon className='text-green-700 size-4' />
-                        } >Crear Formulario</SidebarMenuItem>
+                        } >Crear Formulario</MfSidebarMenuItem>
 
-                    </SidebarDropdown>
+                    </MfSidebarDropdown>
 
-                    <SidebarMenuItem href="#" icon={
+                    <MfSidebarMenuItem href="#" icon={
                         <GearIcon className='size-6' />
-                    } >Settings</SidebarMenuItem>
+                    } >Settings</MfSidebarMenuItem>
                 </ul>
-                <SidebarFooter className="mt-auto" text='© 2024 MotorFlash' />
+                <MfSidebarFooter className="mt-auto" text='© 2024 MotorFlash' />
             </div>
         </aside>
     );
 };
 
 // Componente principal del sidebar
-const Sidebar = () => {
+const MfSidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleSidebar = () => {
+    const MftoggleSidebar = () => {
         setIsOpen(!isOpen);
     };
 
@@ -135,7 +135,7 @@ const Sidebar = () => {
         <>
             <Button
                 className="fixed top-2 left-2 inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                onClick={toggleSidebar}
+                onClick={MftoggleSidebar}
                 aria-controls="sidebar-multi-level-sidebar"
                 aria-expanded={isOpen}
             >
@@ -143,9 +143,9 @@ const Sidebar = () => {
                 <span className="sr-only">Open sidebar</span>
             </Button>
            
-            <SidebarContent isOpen={isOpen} /> 
+            <MfSidebarContent isOpen={isOpen} /> 
         </>
     );
 };
 
-export default Sidebar;
+export default MfSidebar;

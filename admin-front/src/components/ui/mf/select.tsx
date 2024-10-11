@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { Container } from './container';
+import { MfContainer } from './container';
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
     label:string;
@@ -28,7 +28,7 @@ const Select: React.FC<SelectProps> =({
   onChange,
 })=>{
     return(
-        <Container>
+        <MfContainer>
             {label && <label htmlFor={id} className="block text-sm font-bold text-gray-700">{label}</label>}
         <select
             id={id}
@@ -44,7 +44,7 @@ const Select: React.FC<SelectProps> =({
             ))}
         </select>
         { error && <label htmlFor={id} className="block text-xs font-bold  text-red-500">{error}</label> }
-        </Container>
+        </MfContainer>
     );
 };
 

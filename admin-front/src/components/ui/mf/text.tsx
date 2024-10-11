@@ -1,6 +1,6 @@
 import React from 'react';
-import { cn } from '../../lib/utils';
-import { Container } from './container';
+import { cn } from '../../../lib/utils';
+import { MfContainer } from './container';
 
 interface TextProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>{
     label?: string;
@@ -32,7 +32,7 @@ const Text: React.FC<TextProps>=({
     onChange,
 })=>{
     return(
-        <Container>
+        <MfContainer>
             {label&&<label htmlFor={id} className="block text-sm font-bold text-gray-700">{label}</label>}
         <textarea 
             id={id} 
@@ -48,7 +48,7 @@ const Text: React.FC<TextProps>=({
             {value}
         </textarea>
         {error && <label htmlFor={id} className="block text-xs font-bold  text-red-500">{error}</label>}
-        </Container>
+        </MfContainer>
     )
 }
 

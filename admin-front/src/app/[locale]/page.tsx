@@ -1,11 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import Sidebar from '@/components/ui/sidebar';
-import { Skeleton } from '@/components/ui/skeleton';
-import Input from '@/components/ui/input';
-import Text from '@/components/ui/text';
-import Select from '@/components/ui/select';
+import Sidebar from '@/components/ui/mf/sidebar';
+import { MfSkeleton } from '@/components/ui/mf/skeleton';
+import Input from '@/components/ui/mf/input';
+import Text from '@/components/ui/mf/text';
+import Select from '@/components/ui/mf/select';
 
 export default function HomePage() {
   const t = useTranslations('HomePage');
@@ -58,30 +58,30 @@ export default function HomePage() {
           label='Test Select Label'
           error='debe seleccionar un valor'
         />
-        {/* Simulación de contenido con Skeletons */}
+        {/* Simulación de contenido Mfcon Skeletons */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">
-            <Skeleton className="h-[200px] w-full rounded-xl" />
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-4 w-1/2" />
+            <MfSkeleton className="h-[200px] w-full rounded-xl" />
+            <MfSkeleton className="h-4 w-3/4" />
+            <MfSkeleton className="h-4 w-1/2" />
           </div>
 
           <div className="space-y-4">
-            <Skeleton className="h-[200px] w-full rounded-xl" />
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-4 w-1/2" />
+            <MfSkeleton className="h-[200px] w-full rounded-xl" />
+            <MfSkeleton className="h-4 w-3/4" />
+            <MfSkeleton className="h-4 w-1/2" />
           </div>
 
           <div className="space-y-4">
-            <Skeleton className="h-[200px] w-full rounded-xl" />
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-4 w-1/2" />
+            <MfSkeleton className="h-[200px] w-full rounded-xl" />
+            <MfSkeleton className="h-4 w-3/4" />
+            <MfSkeleton className="h-4 w-1/2" />
           </div>
 
           <div className="space-y-4">
-            <Skeleton className="h-[200px] w-full rounded-xl" />
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-4 w-1/2" />
+            <MfSkeleton className="h-[200px] w-full rounded-xl" />
+            <MfSkeleton className="h-4 w-3/4" />
+            <MfSkeleton className="h-4 w-1/2" />
           </div>
         </div>
       </div>
