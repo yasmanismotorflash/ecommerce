@@ -32,6 +32,7 @@ services:
   backend:
     build:
       context: ./docker/php
+    image: ecommerce_php:1.0
     container_name: backend_php
     restart: unless-stopped
     ports:
