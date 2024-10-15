@@ -1,21 +1,21 @@
 'use client'
-import {MixerHorizontalIcon,TrashIcon} from '@radix-ui/react-icons';
+import {MixerHorizontalIcon} from '@radix-ui/react-icons';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/mf/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/mf/input";
-import useStore from '@/store/store';
-import { FormEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+
+/*import Label from "@/components/ui/label";
+import Input  from "@/components/ui/mf/input";*/
+//import useStore from '@/store/store';
+import { FormEvent, /*useEffect,*/ useState } from 'react';
+//import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 
 export default function FilterData(){
-    const {items, filters, setFilters, url, setUrl} = useStore();
+    //const {items, filters, setFilters, url, setUrl} = useStore();
     const [isOpen, setIsOpen] = useState(false);
-    const router = useRouter();
+    //const router = useRouter();
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         router.push(url);
     },[url])
 
@@ -23,10 +23,10 @@ export default function FilterData(){
 
         setUrl();
     },[filters])
-
+*/
     const handleSubmit=(event:FormEvent<HTMLFormElement>)=>{
         event.preventDefault();
-        const formData = new FormData(event.currentTarget);
+        /*const formData = new FormData(event.currentTarget);
         let tempFilters= '';
 
         for (const [key, value] of formData.entries()) {
@@ -46,14 +46,14 @@ export default function FilterData(){
         }
         
         if (tempFilters!==''){
-            setFilters(tempFilters);
-        }
+            //setFilters(tempFilters);
+        }*/
     }
 
-    const handleCleanFilters=()=>{
-        setFilters('')
+    /*const handleCleanFilters=()=>{
+        //setFilters('')
         setIsOpen(false);
-    }
+    }*/
 
     return(
         <>
@@ -72,7 +72,7 @@ export default function FilterData(){
                 <form onSubmit={handleSubmit}> 
                 <div className="grid gap-4 py-4">
                     {
-                        items.map((item,index)=>(
+                       /* items.map((item,index)=>(
                             item.inSearch===true?
                                 <div key={index}  className="grid grid-cols-8 items-center gap-4 w-full">
                                     {
@@ -111,7 +111,7 @@ export default function FilterData(){
                                 </div>
                             :null
 
-                        ))
+                        ))*/
                     }
                     
                 </div>
@@ -124,11 +124,11 @@ export default function FilterData(){
             </SheetContent>
         </Sheet>
         {
-            filters!==''?
+            /*filters!==''?
                 <Button variant="outline" className="dark:border-white dark:hover:bg-white dark:hover:text-black" type="button" onClick={handleCleanFilters}> 
                     <TrashIcon className='mr-2'/> Limpiar Filtros
                 </Button>
-            :null
+            :null*/
         }
         </>
     )

@@ -4,21 +4,21 @@ import {
     Table,
     TableBody,
     TableCaption,
-    TableHead,
+    //TableHead,
     TableHeader,
     TableRow,
   } from "@/components/ui/table";
   
 import RenderTableHeader from "./RenderTableHeader";
-import RenderTableRow from "./RenderTableRow";
+//import RenderTableRow from "./RenderTableRow";
 //import DialogDetails from "../DialogDetails/DialogDetails";
 //import { fetchDetailsData } from "@/controllers/dataFetching";
 
 
 
 interface Props {
-    res:any
-    config:Object
+    res:[],
+    config:[],
     Item:[],
     paramSource:string,
 }
@@ -27,8 +27,9 @@ interface Props {
 
 function Dtable(props:Props){
     
-    const {res,config,Item,paramSource}=props;
-    const data = res.data;
+    const {res,/*config,Item,*/paramSource}=props;
+    //const data = res.data;
+    console.log(res);
     
     
     return(
@@ -41,7 +42,7 @@ function Dtable(props:Props){
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <RenderTableRow data={data}  />
+                    {/*<RenderTableRow data={data}  />*/}
                 </TableBody>
             </Table>
             {/*<DialogDetails />*/}

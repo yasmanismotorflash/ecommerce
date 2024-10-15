@@ -1,19 +1,20 @@
 'use client'
-//import useStore from "@/store/store"
+/*import useStore from "@/store/store"
 import RenderTableCell from "./RenderTableCell"
 import { TableCell, TableRow } from "@/components/ui/table"
 import { EyeOpenIcon } from '@radix-ui/react-icons';
-//import useImageStore from "@/store/imagesStore";
+import useImageStore from "@/store/imagesStore";
 import { Button } from "@/components/ui/button";
-import { useCallback } from "react";
+import { useCallback } from "react";*/
 
-export default function RenderTableRow({data}:{data:any}){
+export default function RenderTableRow({data}:{data:[]}){
+    console.log(data);
     //const { setIsImageDialogOpen, setImageId, isLoading, setIsLoading } = useImageStore();
-    const handleClick = useCallback((value:string)=>{
-            //setIsImageDialogOpen(true);
-            //setImageId(value);
+    /*const handleClick = useCallback((value:string)=>{
+            setIsImageDialogOpen(true);
+            setImageId(value);
 
-    },[])
+    },[])*/
     
     //const {items}=useStore()
     return(

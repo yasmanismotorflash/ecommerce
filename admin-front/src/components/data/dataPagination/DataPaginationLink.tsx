@@ -1,5 +1,5 @@
 'use client'
-import {
+/*import {
     PaginationEllipsis,
     PaginationItem,
 	PaginationLink,
@@ -8,7 +8,7 @@ import {
   } from "@/components/ui/pagination";
 //import useStore from "@/store/store";
 import { useEffect } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';*/
 
 interface Props{
     type:string;
@@ -18,8 +18,9 @@ interface Props{
 }
 
 export default function DataPaginationLink(props:Props){
-    const router = useRouter();
-    const {type,pages,paramSource,item} = props
+    console.log(props);
+    //const router = useRouter();
+    //const {type,pages,paramSource,item} = props
     /*const {page,setPage,url,setUrl, source,setSource,items,setItems} = useStore();
 
     useEffect(()=>{

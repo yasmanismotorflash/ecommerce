@@ -1,7 +1,7 @@
-import { Key } from "react";
+/*import { Key } from "react";
 import { TableCell } from "@/components/ui/table";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../../ui/carousel";
-import Image from "next/image";
+import Image from "next/image";*/
 
 interface RenderProps{
     row:[],
@@ -11,8 +11,8 @@ interface RenderProps{
 }
 
 export default function RenderTableCell(props:RenderProps){
-    const {row,column,colIndex,Item} = props
-    
+    //const {row,column,colIndex,Item} = props
+    console.log(props);
     /*if (column.sortable!==undefined){
         let cellValue:any = null;*/
         /*if (typeof (row[column.name]) === 'object' && row[column.name]!==null) {

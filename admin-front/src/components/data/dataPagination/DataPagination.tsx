@@ -1,9 +1,9 @@
 import {
 	Pagination,
-	PaginationContent,
-	PaginationItem,
+	/*PaginationContent,
+	PaginationItem,*/
   } from "@/components/ui/pagination";
-import DataPaginationLink from "./DataPaginationLink";
+//import DataPaginationLink from "./DataPaginationLink";
 
 interface Props{
     pages:number;
@@ -12,8 +12,9 @@ interface Props{
 }
 
 export default function DataPagination(props:Props){
-    const {pages,item, paramSource} = props;
-    return(
+   //const {pages,item, paramSource} = props;
+   console.log(props) 
+   return(
         <Pagination>
             {/*<PaginationContent>
                 <PaginationItem>
