@@ -15,7 +15,7 @@ export default function DataPagination(props:Props){
     const {pages,item, paramSource} = props;
     return(
         <Pagination>
-            <PaginationContent>
+            {/*<PaginationContent>
                 <PaginationItem>
                     <DataPaginationLink type='previous' paramSource={paramSource} pages={pages} item={item} />
                 </PaginationItem>
@@ -23,7 +23,7 @@ export default function DataPagination(props:Props){
                 <PaginationItem>
                     <DataPaginationLink type='next' paramSource={paramSource} pages={pages} item={item} />
                 </PaginationItem>
-            </PaginationContent>
+            </PaginationContent>*/}
         </Pagination>
     )
 }

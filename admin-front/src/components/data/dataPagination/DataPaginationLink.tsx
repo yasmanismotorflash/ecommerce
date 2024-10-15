@@ -6,7 +6,7 @@ import {
     PaginationNext,
     PaginationPrevious,
   } from "@/components/ui/pagination";
-import useStore from "@/store/store";
+//import useStore from "@/store/store";
 import { useEffect } from "react";
 import { useRouter } from 'next/navigation';
 
@@ -20,7 +20,7 @@ interface Props{
 export default function DataPaginationLink(props:Props){
     const router = useRouter();
     const {type,pages,paramSource,item} = props
-    const {page,setPage,url,setUrl, source,setSource,items,setItems} = useStore();
+    /*const {page,setPage,url,setUrl, source,setSource,items,setItems} = useStore();
 
     useEffect(()=>{
         router.push(url);
@@ -74,10 +74,10 @@ export default function DataPaginationLink(props:Props){
             setPage(value);
         }
         setUrl();
-    }
+    }*/
 
 
-    const SetButtonPage=()=>{
+    /*const SetButtonPage=()=>{
         let paginations=[];
         if (pages<=5){
             
@@ -90,11 +90,11 @@ export default function DataPaginationLink(props:Props){
                 {paginations}
                 </>
             )
-        }
-        if (page<5&&pages>5)
+        }*/
+        /*if (page<5&&pages>5)
             return(
                 <>
-                    <PaginationItem>
+                   { <PaginationItem>
                         <PaginationLink key={1} href="#" onClick={()=>setCurrent(1)}>1</PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
@@ -114,14 +114,14 @@ export default function DataPaginationLink(props:Props){
                     </PaginationItem>
                     <PaginationItem>
                         <PaginationLink href="#" key={pages} onClick={()=>setCurrent(pages)}>{pages}</PaginationLink>
-                    </PaginationItem>
+                    </PaginationItem>}
                     
                 </>
-            )
-        if (page>=5 && page<=pages-5){
+            )*/
+        /*if (page>=5 && page<=pages-5){
             return(
                 <>
-                    <PaginationItem>
+                    {<PaginationItem>
                         <PaginationLink href="#" key={1} onClick={()=>setCurrent(1)}>1</PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
@@ -141,14 +141,14 @@ export default function DataPaginationLink(props:Props){
                     </PaginationItem>
                     <PaginationItem>
                         <PaginationLink key={pages} href="#" onClick={()=>setCurrent(pages)}>{pages}</PaginationLink>
-                    </PaginationItem>
+                    </PaginationItem>}
                 </>
             )
-        }
-        if (page>(pages-5))
+        }*/
+        /*if (page>(pages-5))
             return(
                 <>
-                    <PaginationItem>
+                    {<PaginationItem>
                         <PaginationLink key={1} href="#" onClick={()=>setCurrent(1)}>1</PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
@@ -168,13 +168,13 @@ export default function DataPaginationLink(props:Props){
                     </PaginationItem>
                     <PaginationItem>
                         <PaginationLink key={pages} href="#" onClick={()=>setCurrent(pages)}>{pages}</PaginationLink>
-                    </PaginationItem>
+                    </PaginationItem>}
                     
                 </>
             )
-    }
+    }*/
 
-    switch (type){
+    /*switch (type){
         case 'previous':
             return(
                 <PaginationPrevious href="#" onClick={setPrevious} />
@@ -187,6 +187,6 @@ export default function DataPaginationLink(props:Props){
             return(
                 <SetButtonPage />
             )   
-    }
+    }*/
 
 }

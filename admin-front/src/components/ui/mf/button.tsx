@@ -2,7 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-interface MfButtonProps extends React.MfButtonHTMLAttributes<HTMLMfButtonElement> {
+interface MfButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;      
   id?: string;       
   name?: string;       

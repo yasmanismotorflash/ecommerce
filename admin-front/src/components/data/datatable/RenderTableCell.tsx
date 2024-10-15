@@ -1,6 +1,6 @@
 import { Key } from "react";
 import { TableCell } from "@/components/ui/table";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../../ui/carousel";
 import Image from "next/image";
 
 interface RenderProps{
@@ -13,12 +13,12 @@ interface RenderProps{
 export default function RenderTableCell(props:RenderProps){
     const {row,column,colIndex,Item} = props
     
-    if (column.sortable!==undefined){
-        let cellValue:any = null;
+    /*if (column.sortable!==undefined){
+        let cellValue:any = null;*/
         /*if (typeof (row[column.name]) === 'object' && row[column.name]!==null) {
             cellValue = row[column.name].name;
         }else*/
-            cellValue = (row[column.name])
+        /*    cellValue = (row[column.name])
         if (cellValue!==undefined)
             switch (column.name){
                 case "selection":
@@ -114,5 +114,5 @@ export default function RenderTableCell(props:RenderProps){
                             {cellValue}
                     </TableCell>)
             }
-    }
+    }*/
 }

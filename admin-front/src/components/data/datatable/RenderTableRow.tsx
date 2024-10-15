@@ -1,23 +1,24 @@
 'use client'
-import useStore from "@/store/store"
+//import useStore from "@/store/store"
 import RenderTableCell from "./RenderTableCell"
 import { TableCell, TableRow } from "@/components/ui/table"
 import { EyeOpenIcon } from '@radix-ui/react-icons';
-import useImageStore from "@/store/imagesStore";
-import { Button } from "@/components/ui/mf/button";
+//import useImageStore from "@/store/imagesStore";
+import { Button } from "@/components/ui/button";
 import { useCallback } from "react";
 
 export default function RenderTableRow({data}:{data:any}){
-    const { setIsImageDialogOpen, setImageId, isLoading, setIsLoading } = useImageStore();
+    //const { setIsImageDialogOpen, setImageId, isLoading, setIsLoading } = useImageStore();
     const handleClick = useCallback((value:string)=>{
-            setIsImageDialogOpen(true);
-            setImageId(value);
+            //setIsImageDialogOpen(true);
+            //setImageId(value);
 
     },[])
     
-    const {items}=useStore()
+    //const {items}=useStore()
     return(
-        data!==undefined?
+        <></>
+        /*data!==undefined?
             data.map((row:object,rowIndex:number)=>(
                 <TableRow key={rowIndex} className="dark:hover:bg-gray-600">
                     {
@@ -32,6 +33,6 @@ export default function RenderTableRow({data}:{data:any}){
                     </TableCell>
                 </TableRow>
             )):
-        null
+        null*/
     )
 }
