@@ -11,8 +11,9 @@ La estructura del proyecto es la siguiente:
 /ecommerce
     /admin-front        # Frontend de administración en Next.js
     /storefront         # Frontend de la tienda en Next.js
-    /backend            # Backend en Symfony (PHP 8.2)
+    /backend            # Backend en Symfony (PHP 8.3)
     /docker             # Configuraciones específicas para Docker
+        /mysql          # Configuraciones y datos de MySQL para datos y configuraciones
         /nginx          # Configuraciones de Nginx para Admin y Storefront
         /php            # Configuraciones personalizadas de PHP (php.ini)
     docker-compose.yml  # Archivo de configuración de Docker Compose
@@ -26,8 +27,8 @@ La estructura del proyecto es la siguiente:
   - Node.js (versión 18-alpine en Docker)
 
 - **Backend**:
-  - Symfony (PHP 8.2)
-  - MySQL (versión 8.0)
+  - Symfony (PHP 8.3)
+  - MySQL (versión 9.0)
 
 - **Infraestructura**:
   - Docker
@@ -71,7 +72,7 @@ Esto descargará las imágenes necesarias, construirá los servicios y levantar�
 
 - **Storefront**: [http://storefront.local](http://storefront.local)
 - **Admin**: [http://admin.local](http://admin.local)
-- **Backend Symfony**: [http://localhost:8000](http://localhost:8000)
+- **Backend Symfony**: [http://backend.local](http://localhost:8000)
 
 ### 5. Conexión a la Base de Datos
 

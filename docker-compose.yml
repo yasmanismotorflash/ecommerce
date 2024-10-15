@@ -15,17 +15,16 @@ services:
       MYSQL_USER: app_user
       MYSQL_PASSWORD: app_password
     volumes:
-      - db_data:/var/lib/mysql
+      - ./docker/mysql/data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3308:3306"
     networks:
       - services-net
 
   redis_cache:
     image: redis:alpine
     container_name: redis_cache
-    ports:
-      - "6379:6379"
+    restart: unless-stopped
     networks:
       - services-net
 
@@ -36,7 +35,7 @@ services:
     container_name: backend_php
     restart: unless-stopped
     ports:
-      - "8000:80"
+      - "8010:80"
     volumes:
       - ./backend:/var/www/backend
     working_dir: /var/www/backend
@@ -57,7 +56,7 @@ services:
     container_name: storefront_app
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3010:3000"
     volumes:
       - ./storefront:/usr/src/app
     depends_on:
@@ -75,7 +74,7 @@ services:
     container_name: admin_app
     restart: unless-stopped
     ports:
-      - "3001:3000"
+      - "3011:3000"
     volumes:
       - ./admin-front:/usr/src/app
     depends_on:
