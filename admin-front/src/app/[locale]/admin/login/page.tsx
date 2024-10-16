@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import MfInput from '@/components/ui/mf/input';
 import MfButton from '@/components/ui/mf/button';
-import {LockClosedIcon, PersonIcon} from '@radix-ui/react-icons'
+import {PersonIcon} from '@radix-ui/react-icons'
 
 export default function LoginPage() {
     const [error, setError] = useState<string | null>(null);
