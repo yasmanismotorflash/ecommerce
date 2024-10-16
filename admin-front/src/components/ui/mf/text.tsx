@@ -40,13 +40,12 @@ const Text: React.FC<TextProps>=({
             disabled={disabled}
             className={cn('flex h-9 rounded-md border border-input border-gray-600 px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',className)}
             rows={rows?rows:40}
-            cols={cols?cols:50}
+            cols={cols?cols:40}
             placeholder={placeholder}
             key={key}
             onChange={onChange}
-        >
-            {value}
-        </textarea>
+            value={value}
+        />
         {error && <label htmlFor={id} className="block text-xs font-bold  text-red-500">{error}</label>}
         </MfContainer>
     )

@@ -11,6 +11,7 @@ interface MfButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   key?:string,
   onClick?: () => void; 
   children?: React.ReactNode; 
+  type?:"submit" | "reset" | "button" | undefined;
 }
 
 const MfButton: React.FC<MfButtonProps> = ({
@@ -22,13 +23,15 @@ const MfButton: React.FC<MfButtonProps> = ({
   key,
   onClick,
   children,
+  type,
 }) => {
   return (
     <button
       id={id}
       name={name}
       disabled={disabled}
-      className={cn(className)}
+      type={type}
+      className={cn(className,'w-fit rounded-md border border-input border-gray-600 px-3 py-1')}
       key={key}
       onClick={onClick}
     >

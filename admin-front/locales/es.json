@@ -3,7 +3,7 @@
     "title": "Hola mundo"
   },
   "AdminPage":{
-    "title": "Bienvendio {name}",
+    "title": "Bienvenido {name}",
     "message": "Este es el panel de administración para la configuración regional {locale}"
 
   },

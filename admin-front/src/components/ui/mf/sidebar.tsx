@@ -1,5 +1,6 @@
-import React, { useState, ReactNode } from 'react';
-import { HamburgerMenuIcon, ListBulletIcon, PlusCircledIcon, GearIcon, ChevronDownIcon } from '@radix-ui/react-icons';
+import React, { useState, ReactNode, MouseEventHandler } from 'react';
+import { signOut } from 'next-auth/react';
+import { HamburgerMenuIcon, ListBulletIcon, PlusCircledIcon, GearIcon, ChevronDownIcon, PersonIcon } from '@radix-ui/react-icons';
 import Button from './button';
 
 
@@ -21,6 +22,7 @@ export interface MfSidebarMenuItemProps {
     icon: JSX.Element;
     children: ReactNode;
     className?: string;
+    onClick?: MouseEventHandler<HTMLLIElement> | undefined;
 }
 
 export interface MfSidebarDropdownProps {
@@ -53,17 +55,20 @@ const MfSidebarTitle: React.FC<MfSidebarTitleProps> = ({ title, className }) => 
 };
 
 // Componente para el item del menú
-const MfSidebarMenuItem: React.FC<MfSidebarMenuItemProps> = ({ href, icon, children, className }) => {
+const MfSidebarMenuItem: React.FC<MfSidebarMenuItemProps> = ({ href, icon, children, className, onClick }) => {
     return (
-        <li>
-            <a
-                href={href}
-                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${className}`}
-            >
-                {icon}
-                <span className="ms-3">{children}</span>
-            </a>
-        </li>
+        <>
+            
+                <li onClick={onClick}>
+                    <a
+                        href={href}
+                        className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${className}`}
+                    >
+                        {icon}
+                        <span className="ms-3">{children}</span>
+                    </a>
+                </li>
+        </>
     );
 };
 
@@ -75,9 +80,9 @@ const MfSidebarDropdown: React.FC<MfSidebarDropdownProps> = ({ title, icon, chil
     };
 
     return (
-        <li>
+        <li className='w-full'>
             <Button
-                className={`flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 ${className}`}
+                className={`flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700  ${className}`}
                 onClick={toggleDropdown}
             >
                 {icon}
@@ -94,6 +99,12 @@ const MfSidebarDropdown: React.FC<MfSidebarDropdownProps> = ({ title, icon, chil
 
 // Componente principal del sidebar
 const MfSidebarContent: React.FC<MfSidebarContentProps> = ({ isOpen }) => {
+    
+    const handleCloseSession =async (event: React.MouseEvent<HTMLElement>)=>{
+        event.preventDefault();
+        await signOut({ callbackUrl: '/es/admin' });        
+    }
+
     return (
         <aside
         id="sidebar-multi-level-sidebar"
@@ -101,9 +112,9 @@ const MfSidebarContent: React.FC<MfSidebarContentProps> = ({ isOpen }) => {
         aria-label="MfSidebar"
         >   
         
-            <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+            <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 w-full">
                 <MfSidebarTitle title="Menu" />
-                <ul className="space-y-2 font-medium">
+                <ul className="space-y-2 font-medium w-full">
                     <MfSidebarDropdown title="Formularios" icon={
                         <ListBulletIcon className='size-6' />
                     }>
@@ -116,6 +127,19 @@ const MfSidebarContent: React.FC<MfSidebarContentProps> = ({ isOpen }) => {
                     <MfSidebarMenuItem href="#" icon={
                         <GearIcon className='size-6' />
                     } >Settings</MfSidebarMenuItem>
+
+                    <MfSidebarDropdown title="Cuenta" icon={
+                        <PersonIcon className='size-6' />
+                    }>
+                        <MfSidebarMenuItem 
+                            href="#" 
+                            icon={
+                                <PlusCircledIcon className='text-green-700 size-4' />
+                            }
+                            onClick={handleCloseSession}  
+                        >Salir</MfSidebarMenuItem>
+                    </MfSidebarDropdown>
+
                 </ul>
                 <MfSidebarFooter className="mt-auto" text='© 2024 MotorFlash' />
             </div>

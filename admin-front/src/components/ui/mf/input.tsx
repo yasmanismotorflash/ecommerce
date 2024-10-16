@@ -13,6 +13,7 @@ interface MfInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     key?:string;
     error?:string;
     onChange?: () => void;
+    type?: string
 }
 
 const MfInput: React.FC<MfInputProps> = ({
@@ -26,12 +27,13 @@ const MfInput: React.FC<MfInputProps> = ({
     key,
     error,
     onChange,
+    type,
 })=>{
     return(
         <MfContainer>
         {label && <label htmlFor={id} className="block text-sm font-bold text-gray-700">{label}</label>}
         <input
-            
+            type={type? type:'text'}
             value={value}
             placeholder={placeholder}
             id={id}
