@@ -1,7 +1,9 @@
 
 # My E-commerce Project
 
-Este proyecto es un sistema e-commerce compuesto de un backend en Symfony y dos frontends separados: uno para la parte de administración (**Admin**) y otro para la tienda pública (**Storefront**). Todo está estructurado y orquestado en un entorno de Docker.
+---
+
+Este proyecto es un sistema e-commerce compuesto de un backend en Symfony y dos frontends separados: uno para la parte de administración (**Admin**) y otro para la tienda pública (**Storefront**). Todo está estructurado y orquestado en un entorno de Docker-compose.
 
 ## Estructura del Proyecto
 
@@ -24,16 +26,17 @@ La estructura del proyecto es la siguiente:
 
 - **Frontend**:
   - Next.js (para Storefront y Admin)
-  - Node.js (versión 18-alpine en Docker)
+  - Node.js (versión 20.18 )
 
 - **Backend**:
   - Symfony (PHP 8.3)
   - MySQL (versión 9.0)
+  - Redis
 
 - **Infraestructura**:
   - Docker
-  - Docker Compose
-  - Nginx (proxy para Storefront y Admin)
+  - Docker-Compose
+  - Nginx (proxy para Storefront, Admin, backend)
 
 ## Instrucciones para Desplegar el Proyecto
 
@@ -76,18 +79,18 @@ Esto descargará las imágenes necesarias, construirá los servicios y levantar�
 
 ### 5. Conexión a la Base de Datos
 
-El contenedor de MySQL estará corriendo en `localhost` en el puerto `3306`. Las credenciales de la base de datos son las siguientes:
+El contenedor de MySQL estará corriendo en `localhost` en el puerto `3308`. Las credenciales de la base de datos son las siguientes:
 
-- **Host**: `db`
-- **Usuario**: `user`
-- **Contraseña**: `password`
+- **Host**: `mysql_db`
+- **Usuario**: `app_user`
+- **Contraseña**: `app_password`
 - **Base de datos**: `ecommerce`
 
 ### 6. Personalización de Configuraciones
 
 #### Nginx
 
-Las configuraciones de Nginx para el frontend (storefront y admin) están en la carpeta `/docker/nginx/`. Puedes ajustar los archivos `storefront.conf` y `admin.conf` según tus necesidades.
+Las configuraciones de Nginx para el frontend (storefront, admin y backend) están en la carpeta `/docker/nginx/`. Puedes ajustar los archivos `storefront.conf` y `admin.conf` según tus necesidades.
 
 #### PHP
 
@@ -106,6 +109,39 @@ Las configuraciones personalizadas de PHP están en la carpeta `/docker/php/`. E
   ```bash
   docker-compose up --build
   ```
+
+
+## Inicializar el backend
+
+- ### 1- Entrar al contenedos de php ejecutando el comando
+
+    docker exec -it server-php bash
+
+- ### 2- Instalar dependencias ejecutando dentro del contenedor de PHP
+
+    composer install
+
+- ### 3-Crear Base de datos (si ya existe omitir este paso)
+
+    php bin/console doctrine:database:create
+
+- ### 4-Crear esquema de tablas dentro de la base de datos
+
+    php bin/console doctrine:schema:create
+
+- ### 5-Cargar datos iniciales
+
+    php bin/console doctrine:fixtures:load --append
+
+Backend listo !!!
+
+  ### Credenciasles para autenticacion
+- usuario: admin@apicore.local  
+- password: 123
+
+
+
+
 
 ## Notas Adicionales
 
