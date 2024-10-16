@@ -1,3 +1,7 @@
+auth:
+    path: /auth
+    methods: ['POST']
+
 api_platform:
     resource: .
     type: api_platform
