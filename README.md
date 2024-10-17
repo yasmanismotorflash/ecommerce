@@ -115,7 +115,7 @@ Las configuraciones personalizadas de PHP están en la carpeta `/docker/php/`. E
 
 - ### 1- Entrar al contenedos de php ejecutando el comando
 
-    docker exec -it server-php bash
+    docker exec -it backend_php bash
 
 - ### 2- Instalar dependencias ejecutando dentro del contenedor de PHP
 
