@@ -136,7 +136,7 @@ Las configuraciones personalizadas de PHP están en la carpeta `/docker/php/`. E
 Backend listo !!!
 
   ### Credenciasles para autenticacion
-- usuario: admin@apicore.local  
+- usuario: admin@backend.local  
 - password: 123
 
 

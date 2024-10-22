@@ -13,7 +13,7 @@ class AppFixtures extends Fixture
 
         //Agregar usuario admin.
         $admin = new User();
-        $admin->setEmail('admin@apicore.local')
+        $admin->setEmail('admin@backend.local')
               ->setPassword('$2y$13$3gPr7jQWdp8EdyUH6c2nhOwgs/Qb.suxfNKi21HQioI1.CoNb9q8m');
 
         $manager->persist($admin);
