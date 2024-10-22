@@ -135,9 +135,17 @@ Las configuraciones personalizadas de PHP están en la carpeta `/docker/php/`. E
 
 Backend listo !!!
 
-  ### Credenciasles para autenticacion
-- usuario: admin@backend.local  
-- password: 123
+  ### Credenciasles para autenticación
+  - usuario: admin@backend.local  
+  - password: 123
+
+
+  - usuario: user@backend.local
+  - password: 456
+
+
+  - usuario: user2@backend.local
+  - password: 789
 
 ### Para borrar la base de datos y cargar todo de cero (Si hiciera falta)
       si desea eliminar la base de datos y cargar todo de nuevo ejecutar 
