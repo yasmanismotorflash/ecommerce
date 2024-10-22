@@ -139,9 +139,25 @@ Backend listo !!!
 - usuario: admin@backend.local  
 - password: 123
 
-
-
-
+### Para borrar la base de datos y cargar todo de cero (Si hiciera falta)
+      si desea eliminar la base de datos y cargar todo de nuevo ejecutar 
+    
+      //Este ejecutara bash dentro del contenedor backend_php ubicado en el directorio de la app 
+      docker exec -it backend_php bash
+    
+      //Esto borra la base de datos y la crea de nuevo
+      php bin/console doctrine:database:drop --force
+    
+      //Esto crea la base de datos
+      php bin/console doctrine:database:create
+    
+      //Esto crea el esquema de tablas y relaciones de la base de datos
+      php bin/console doctrine:schema:create
+    
+      //Esto carga los datos iniciales
+      php bin/console doctrine:fixtures:load --append
+    
+      Listo BD reseteada de cero!!!
 
 ## Notas Adicionales
 
