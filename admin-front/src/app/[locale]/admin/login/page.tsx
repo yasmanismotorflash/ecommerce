@@ -13,20 +13,23 @@ export default function LoginPage() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        const email = formData.get('email') as string;
-        const password = formData.get('password') as string;
+        const loginEmail = formData.get('email') as string;
+        const loginPassword = formData.get('password') as string;
+        const loginCallbackUrl = process.env.CALLBACK_URL
 
         const result = await signIn('credentials', {
             redirect: false,
-            email,
-            password,
+            email:loginEmail,
+            password: loginPassword,
+            callbackUrl:loginCallbackUrl
         });
-
+        
+        console.log('RESULT',result)
         if (result?.error) {
-            setError('Invalid credentials');
+            setError(error);
         } else {
             setError(null);
-            router.push('/admin');  // Redirige al dashboard después del login
+            router.push('/admin');   //Redirige al dashboard después del login
         }
     };
 

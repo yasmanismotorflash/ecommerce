@@ -1,23 +1,40 @@
-import NextAuth from 'next-auth';
+
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import { NextAuthOptions } from 'next-auth';
 import { error } from 'console';
+import { RequestInternal } from 'next-auth';
 import { redirect } from "next/navigation";
 
 // Extiende el tipo de `session.user` para incluir la propiedad `id`
 declare module 'next-auth' {
     interface Session {
         user: {
-            id: string;  // Añadimos la propiedad `id`
+            id?: string;  // Añadimos la propiedad `id`
             name?: string | null;
             email?: string | null;
             image?: string | null;
+            token?:string | null;
         }
     }
 }
 
+interface Credentials {
+    email: string;
+    password: string;
+  }
+  
+  // Definimos el tipo de usuario que la API devuelve tras la autenticación.
+  interface User {
+    id?: string;
+    email?: string;
+    name?: string;
+    token?:string | null;
+    error?:string | null;
+    // Agrega otros campos que la API devuelva, si es necesario.
+  }
 
+  type Awaitable<T> = T | Promise<T>;
 
 const authOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
@@ -32,10 +49,11 @@ const authOptions: NextAuthOptions = {
             id: 'credentials',
             name: 'Credentials',
             credentials: {
-                email: { label: 'email', type: 'email' },
+                email: { label: 'email', type: 'text' },
                 password: { label: 'password', type: 'password' },
             },
-            async authorize(credentials,req) {
+            async authorize(credentials: Record<"email" | "password", string> | undefined, 
+                req: Pick<RequestInternal, "body" | "query" | "headers" | "method">): Awaitable <User | null> {
                 if (!credentials) {
                     return null;
                 }
@@ -46,7 +64,7 @@ const authOptions: NextAuthOptions = {
                     password: z.string().min(3) 
                 })
                 .safeParse(credentials);
-                console.log(parsedCredentials)
+                //console.log(parsedCredentials)
                 if (parsedCredentials.success){
                     const URI = process.env.API_URL
                     console.log(`${URI}/auth`)
@@ -55,20 +73,25 @@ const authOptions: NextAuthOptions = {
                         "email":email,
                         "password":password,
                     }
-                    
+                    console.log(`${URI}/auth`);
                     if (!URI){
                         throw error('Thereis no URI!!');
                     }
 
 
-                    const res = await fetch(`${URI}/auth`, {
-                        method: 'POST',
-                        body: JSON.stringify(query),
-                        headers: { "Content-Type": "application/json" }
-                    })
-                    console.log('RES',res)
-                    if (res.status===200){
-                        redirect('/admin');
+                    const res = await validateUser(`${URI}/auth`,query);
+                    const user ={
+                        'email':'admin@apicore.local',
+                        'token':'',
+                        'error':res?res.error:null
+                    }
+                    
+                    console.log('USER',user);
+                    if (!user.error){
+                        return user;
+                    }else{
+                        //throw new Error("Invalid email or password");
+                        return {'error':user.error};
                     }
                 }
                 //console.log(res)
@@ -80,26 +103,14 @@ const authOptions: NextAuthOptions = {
             }
         })
     ],
-    pages: {
-        signIn: '/admin/login',
-    },
+
     callbacks: {
         async jwt({ token, user }) {
+            
             if (user) {
                 token.id = user.id;
             }
             return token;
-        },
-        async signIn({ email, credentials }) {
-            const isAllowedToSignIn = true
-            if (isAllowedToSignIn) {
-              return true
-            } else {
-              // Return false to display a default error message
-              return false
-              // Or you can return a URL to redirect to:
-              // return '/unauthorized'
-            }
         },
         async session({ session, token }) {
             if (session?.user && token?.id) {
@@ -112,3 +123,23 @@ const authOptions: NextAuthOptions = {
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+
+const validateUser=async(url:string,query:any)=>{
+    console.log(JSON.stringify(query))
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: { 
+            "Content-Type": "application/json",
+            "Accept": "application/json", 
+        },
+        body: JSON.stringify(query),
+    })
+    if (!res.ok) {
+        const errorMessage = await res.text();  // Lee el contenido del error
+        console.error('Error al autenticar:', errorMessage);
+        return null;
+        //throw new Error(`Failed to authenticate user: ${errorMessage}`);
+    }
+    console.log('RESPONSE',res);
+    return res
+}

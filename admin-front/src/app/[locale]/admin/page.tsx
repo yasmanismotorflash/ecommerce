@@ -9,6 +9,7 @@ import Sidebar from '@/components/ui/mf/sidebar';
 import Input from '@/components/ui/mf/input';
 import Select from '@/components/ui/mf/select';
 import Text from '@/components/ui/mf/text';
+import { Spinner } from '@/components/ui/spinner';
 
 
 export default function AdminPage() {
@@ -39,7 +40,11 @@ export default function AdminPage() {
     }, [status, router, locale]);
 
     if (status === 'loading') {
-       return <p>Loading...</p>;
+       return (<div className='flex w-screen h-screen justify-center items-center ' >
+          <div className='flex rounded-2xl shadow-lg shadow-gray-400 p-8 bg-gray-100'>
+            <Spinner size="small" /> <span className='ml-4 text-xl' >Cargando...</span>
+          </div> 
+        </div>);
     }
 
     if (!session) {
