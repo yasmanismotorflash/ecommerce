@@ -87,5 +87,109 @@
             "id":3,
             "url":"https://ik.imagekit.io/zcafouyff/autos/pexels-mikebirdy-112460.jpg?updatedAt=1729764547992"
         }
+    ],
+    "show_footer":true,
+    "footer":[
+        {
+            "bgColor":"#FFFFFF",
+            "fontColor":"#000000",
+            "links":[
+                {
+                    "title":"COCHES",
+                    "items":[
+                        {
+                            "id":1,
+                            "title":"BMW de ocasión",
+                            "url":"#"
+                        },
+                        {
+                            "id":2,
+                            "title":"MINI de ocasión",
+                            "url":"#"
+                        },
+                        {
+                            "id":3,
+                            "title":"BMW nuevos",
+                            "url":"#"
+                        },
+                        {
+                            "id":4,
+                            "title":"MINI nuevos",
+                            "url":"#"
+                        }
+                    ]
+                },
+                {
+                    "title":"MOTOS",
+                    "items":[
+                        {
+                            "id":1,
+                            "title":"Motorrad de ocasión",
+                            "url":"#"
+                        },
+                        {
+                            "id":2,
+                            "title":"Motorrad nuevas",
+                            "url":"#"
+                        }
+                    ]
+                },
+                {
+                    "title":"RENTING",
+                    "items":[
+                        {
+                            "id":1,
+                            "title":"Renting BMW",
+                            "url":"#"
+                        },
+                        {
+                            "id":2,
+                            "title":"Renting MINI",
+                            "url":"#"
+                        }
+                    ]
+                },
+                {
+                    "title":"NOSOTROS",
+                    "items":[
+                        {
+                            "id":1,
+                            "title":"Quiénes somos",
+                            "url":"#"
+                        },
+                        {
+                            "id":2,
+                            "title":"Ubicaciones y horarios",
+                            "url":"#"
+                        }
+                    ]
+                }
+
+            ]
+            
+        },
+        {
+            "social":[
+                {
+                    "icon":"BMW",
+                    "items":[
+                        {
+                            "red_social":"Instagram",
+                            "url":"#"
+                        },
+                        {
+                            "red_social":"Facebook",
+                            "url":"#"
+                        },
+                        {
+                            "red_social":"Linkend In",
+                            "url":"#"
+                        }
+                        
+                    ]
+                }
+            ]
+        }
+
     ]
 }

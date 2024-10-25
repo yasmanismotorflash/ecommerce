@@ -1,14 +1,6 @@
 import Image from "next/image";
 import { promises as fs } from 'fs';
 import { Metadata } from 'next';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import MfMenuSheet from "@/components/mf/mf-menu-sheet";
@@ -25,13 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const file = await fs.readFile(process.cwd() + '/src/app/params.json', 'utf8');
-  const params = JSON.parse(file);
-
-  console.log(params.menu)
-
-  params.menu.map((item:any) => (
-    console.log(item.submenu)
-  ))
+  const params = JSON.parse(file);  
 
   return (
     <>
@@ -104,53 +90,21 @@ export default async function Home() {
         }
         
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      {params.show_footer&&<footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center w-full">
+        
+        <div className={`grid grid-cols-${params.footer[0].links.length} w-full `}>        
+          {params.footer[0].links.map((link:any)=>(
+            <div key={link.id}>
+              <div className="font-semibold"  >{link.title}</div>
+              {
+                link.items.map((item:any)=>(
+                  <Link key={item.id} href={item.url} className="block w-full text-gray-500">{item.title}</Link>
+                ))
+              }
+            </div>
+          ))}
+        </div>
+      </footer>}
     </div>
     </>
   );
