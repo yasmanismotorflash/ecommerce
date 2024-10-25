@@ -86,7 +86,26 @@ El contenedor de MySQL estará corriendo en `localhost` en el puerto `3308`. Las
 - **Contraseña**: `app_password`
 - **Base de datos**: `ecommerce`
 
-### 6. Personalización de Configuraciones
+### 6. Trabajo con Storefront
+
+En storefront se encuentra una prueba de concepto aun sin terminar, no se ha puesto el footer y aun se considera la posibilidad de incluir otras secciones.
+
+En la carpeta app se encuentra un archivo params.json que tiene datos de prueba que funcionan en lugar de una llamada real al backend. La idea es que cuando venga la respuesta del backend en forma de json se pueda sustituir el estático que usamos ahora por la mencionada respuesta. 
+
+La página inicial de storefront se forma mediante los datos proporcionado por params.json, por ejemplo existe un valor menu con los datos necesarios para formar el menu principal de la aplicación, esto sucede si el valor show_menú es igual a true, de esta forma se arma la página
+
+Ya Storefront está configurado con Nx.
+
+#### Pasos necesarios para trabajar con Storefron
+
+En este momento solo se debe ejecutar el siguiente comando para actualizar los módulos de React que hayan sido instalados durante el trabajo. Si no han existido cambios en package.json no debe ocurrir ninguna instalación.
+
+  ```bash
+    npm install
+  ```
+
+
+### 7. Personalización de Configuraciones
 
 #### Nginx
 

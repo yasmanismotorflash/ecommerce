@@ -1,53 +1,108 @@
 import Image from "next/image";
+import { promises as fs } from 'fs';
+import { Metadata } from 'next';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import Link from "next/link";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import MfMenuSheet from "@/components/mf/mf-menu-sheet";
+import { Menubar,MenubarMenu,MenubarTrigger,MenubarContent,MenubarItem, MenubarShortcut } from "@/components/ui/menubar";
 
-export default function Home() {
+export async function generateMetadata(): Promise<Metadata> {
+  const file = await fs.readFile(process.cwd() + '/src/app/params.json', 'utf8');
+  const params = JSON.parse(file);
+  return {
+    title: params.page_title,
+    description: params.description,
+  };
+}
+
+export default async function Home() {
+  const file = await fs.readFile(process.cwd() + '/src/app/params.json', 'utf8');
+  const params = JSON.parse(file);
+
+  console.log(params.menu)
+
+  params.menu.map((item:any) => (
+    console.log(item.submenu)
+  ))
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+    <div className="flex items-center justify-between min-w-full min-h-14 " >
+        <div className={`${params.show_menu!==false?`sm:hidden`:``} ml-2`}>
+            <MfMenuSheet menu={params.menu} />
         </div>
+        {params.company_name &&<div className="font-bold text-xl ml-2">
+          {params.company_name}
+        </div>}
+        {params.show_menu===true&&
+          <Menubar className={`hidden sm:flex`}>
+            
+              {
+                params.menu.map((item:any) => (
+                  item.url!==undefined?
+                  <MenubarShortcut key={`${item.title}-${item.id}`}>
+                    <Link href={item.url} className="block w-full text-sm">{item.title}</Link>
+                  </MenubarShortcut>
+                  :
+                    <MenubarMenu>
+                      <MenubarTrigger key={`${item.title}-${item.id}`}>{item.title}</MenubarTrigger>
+                        <MenubarContent>
+                          {item.submenu.map((item:any) => (
+                            <MenubarItem key={`${item.title}-${item.id}`}>
+                              <Link href={item.url} className="block w-full">{item.title}</Link>
+                            </MenubarItem>
+                          ))}
+                        </MenubarContent>
+                    </MenubarMenu>                    
+                ))
+              }
+             
+              
+            
+          </Menubar>
+        }
+        <div className="flex items-center mr-2">
+          <Image
+            src={`data:image/svg+xml;base64,${params.company_logo}`}
+            alt="logo"            
+            width={50}
+            height={25}
+            />
+        </div>
+        
+    </div>
+    <div className="grid grid-rows-[20px_1fr_20px] justify-items-center min-h-screen  p-8 sm:p-10  font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col row-start-2  sm:items-start px-4">
+        {
+          params.banner===true?
+          <div className="w-full">
+            <Carousel>
+              <CarouselContent>
+                {
+                  params.banner_images.map((image:any)=>(
+                    <CarouselItem key={image.id}>
+                        <img  
+                          src={image.url}
+                          alt="Image"
+                        />
+                    </CarouselItem>
+                  ))
+                }
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+          </div>:null
+        }
+        
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
@@ -97,5 +152,6 @@ export default function Home() {
         </a>
       </footer>
     </div>
+    </>
   );
 }
