@@ -2,18 +2,31 @@
 
 Este documento describe las convenciones de nomenclatura, estructura de carpetas y estilo de código que el equipo debe seguir para mantener la consistencia en el proyecto. Todos los nombres de variables, funciones y carpetas deben estar en inglés.
 
+## Requisitos Especiales
+- **Compatibilidad con Next.js 14**: Todas las implementaciones deben considerar las mejores prácticas de esta versión.
+- **Soporte Multi-idioma**: El proyecto debe estar preparado para soportar múltiples idiomas usando `next-intl` u otra biblioteca preferida para la internacionalización.
+
 ## Estructura de Carpetas
 
-- **`components/`**: Contiene componentes reutilizables, cada uno en una carpeta que agrupa el archivo del componente y sus estilos.
-- **`pages/`**: Define las páginas principales del proyecto. Cada archivo en esta carpeta se convierte en una ruta.
-- **`config/`**: Contiene archivos de configuración, como los archivos JSON para la personalización por cliente.
-- **`styles/`**: Contiene los archivos de estilos globales, y cada estilo relacionado con el diseño de la aplicación.
-- **`utils/`**: Funciones de utilidad que pueden ser reutilizadas a lo largo del proyecto.
+- **`app/`**: Define las rutas principales del proyecto usando el App Router. Cada subcarpeta en `app` se convierte en una ruta.
+- **`components/`**: Contiene componentes reutilizables, cada uno en su propia carpeta que agrupa el archivo del componente y sus estilos.
+- **`config/`**: Archivos de configuración, como los archivos JSON para la personalización por cliente.
+- **`styles/`**: Archivos de estilos globales y otros estilos relacionados con el diseño de la aplicación.
+- **`utils/`**: Funciones de utilidad reutilizables en todo el proyecto.
+
+### Ejemplo de estructura de carpetas
 
 ### Ejemplo de estructura de carpetas
 
 ```
 project-root/
+│
+├── app/
+│   ├── page.tsx         # Ruta principal ("/")
+│   ├── about/
+│   │   └── page.tsx     # Ruta secundaria ("/about")
+│   └── [pageId]/
+│       └── page.tsx     # Ruta dinámica ("/:pageId")
 │
 ├── components/
 │   ├── Header/
@@ -28,10 +41,6 @@ project-root/
 │
 ├── config/
 │   └── clientConfig.json
-│
-├── pages/
-│   ├── index.tsx
-│   └── about.tsx
 │
 ├── styles/
 │   └── globals.css
