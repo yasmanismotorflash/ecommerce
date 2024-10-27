@@ -16,7 +16,7 @@ import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import Link from "next/link";
 
   interface Props{
-    menu:any[];
+    menu:[];
   }
 
 export default function MfMenuSheet(props:Props){
@@ -31,15 +31,15 @@ export default function MfMenuSheet(props:Props){
             <SheetTitle>Menu</SheetTitle>
           </SheetHeader>
           {
-            menu.map((item:any) => (
+            menu.map((item:{url:string,title:string,submenu:[],id:number}) => (
               item.url!==undefined?
-                <Link href={item.url} className="block w-full">{item.title}</Link>
+                <Link key={`${item.title}-${item.id}`} href={item.url} className="block w-full">{item.title}</Link>
               :
                 <Accordion type="single" collapsible key={`${item.title}-${item.id}`}>
                   <AccordionItem value="item-1">
                     <AccordionTrigger>{item.title}</AccordionTrigger>
                     <AccordionContent className="flex flex-col ">
-                    {item.submenu.map((item:any) => (
+                    {item.submenu.map((item:{id:number,title:string,url:string}) => (
                         <Link key={`${item.title}-${item.id}`} href={item.url} className="block w-full">{item.title}</Link>
                       ))
                     }

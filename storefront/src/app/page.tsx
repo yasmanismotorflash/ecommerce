@@ -32,16 +32,16 @@ export default async function Home() {
           <Menubar className={`hidden sm:flex`}>
             
               {
-                params.menu.map((item:any) => (
+                params.menu.map((item:{id:number,title:string,url:string,submenu:[]}) => (
                   item.url!==undefined?
                   <MenubarShortcut key={`${item.title}-${item.id}`}>
                     <Link href={item.url} className="block w-full text-sm">{item.title}</Link>
                   </MenubarShortcut>
                   :
-                    <MenubarMenu>
+                    <MenubarMenu key={item.id}>
                       <MenubarTrigger key={`${item.title}-${item.id}`}>{item.title}</MenubarTrigger>
                         <MenubarContent>
-                          {item.submenu.map((item:any) => (
+                          {item.submenu.map((item:{id:number,title:string,url:string}) => (
                             <MenubarItem key={`${item.title}-${item.id}`}>
                               <Link href={item.url} className="block w-full">{item.title}</Link>
                             </MenubarItem>
@@ -73,7 +73,7 @@ export default async function Home() {
             <Carousel>
               <CarouselContent>
                 {
-                  params.banner_images.map((image:any)=>(
+                  params.banner_images.map((image:{id:number,url:string})=>(
                     <CarouselItem key={image.id}>
                         <img  
                           src={image.url}
@@ -93,11 +93,11 @@ export default async function Home() {
       {params.show_footer&&<footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center w-full">
         
         <div className={`grid grid-cols-${params.footer[0].links.length} w-full `}>        
-          {params.footer[0].links.map((link:any)=>(
+          {params.footer[0].links.map((link:{id:number,title:string,items:[]})=>(
             <div key={link.id}>
               <div className="font-semibold"  >{link.title}</div>
               {
-                link.items.map((item:any)=>(
+                link.items.map((item:{id:number,url:string,title:string})=>(
                   <Link key={item.id} href={item.url} className="block w-full text-gray-500">{item.title}</Link>
                 ))
               }

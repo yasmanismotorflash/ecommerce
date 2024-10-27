@@ -1,40 +1,33 @@
-
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { z } from 'zod';
-import { NextAuthOptions } from 'next-auth';
-import { error } from 'console';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import { RequestInternal } from 'next-auth';
-import { redirect } from "next/navigation";
 
 // Extiende el tipo de `session.user` para incluir la propiedad `id`
 declare module 'next-auth' {
     interface Session {
         user: {
-            id?: string;  // Añadimos la propiedad `id`
+            id: string;
             name?: string | null;
             email?: string | null;
             image?: string | null;
-            token?:string | null;
+            token?: string | null;
         }
     }
 }
 
-interface Credentials {
+/*interface Credentials {
     email: string;
     password: string;
-  }
-  
-  // Definimos el tipo de usuario que la API devuelve tras la autenticación.
-  interface User {
-    id?: string;
+}*/
+
+interface User {
+    id: string;
     email?: string;
     name?: string;
-    token?:string | null;
-    error?:string | null;
-    // Agrega otros campos que la API devuelva, si es necesario.
-  }
-
-  type Awaitable<T> = T | Promise<T>;
+    token?: string;
+    error?: string;
+}
 
 const authOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
@@ -52,53 +45,43 @@ const authOptions: NextAuthOptions = {
                 email: { label: 'email', type: 'text' },
                 password: { label: 'password', type: 'password' },
             },
-            async authorize(credentials: Record<"email" | "password", string> | undefined, 
-                req: Pick<RequestInternal, "body" | "query" | "headers" | "method">): Awaitable <User | null> {
+            async authorize(
+                credentials: Record<"email" | "password", string> | undefined, 
+                req: Pick<RequestInternal, "body" | "query" | "headers" | "method">
+            ): Promise<User | null> {  // Cambio a Promise<User | null>
                 if (!credentials) {
                     return null;
                 }
-
+                console.log(req);
                 const parsedCredentials = z
-                .object({ 
-                    email: z.string().email(),
-                    password: z.string().min(3) 
-                })
-                .safeParse(credentials);
-                //console.log(parsedCredentials)
-                if (parsedCredentials.success){
-                    const URI = process.env.API_URL
-                    console.log(`${URI}/auth`)
+                    .object({ 
+                        email: z.string().email(),
+                        password: z.string().min(3) 
+                    })
+                    .safeParse(credentials);
+
+                if (parsedCredentials.success) {
+                    const URI = process.env.API_URL;
                     const { email, password } = parsedCredentials.data;
-                    const query ={
-                        "email":email,
-                        "password":password,
-                    }
-                    console.log(`${URI}/auth`);
-                    if (!URI){
-                        throw error('Thereis no URI!!');
+                    const query = { email, password };
+
+                    if (!URI) {
+                        throw new Error('There is no URI!!');
                     }
 
+                    const res = await validateUser(`${URI}/auth`, query);
 
-                    const res = await validateUser(`${URI}/auth`,query);
-                    const user ={
-                        'email':'admin@apicore.local',
-                        'token':'',
-                        'error':res?res.error:null
-                    }
-                    
-                    console.log('USER',user);
-                    if (!user.error){
-                        return user;
-                    }else{
-                        //throw new Error("Invalid email or password");
-                        return {'error':user.error};
+                    if (res && !res.error) {
+                        return {
+                            id: res.id ?? "", // Asegura que `id` siempre sea un string
+                            email: res.email,
+                            name: res.name,
+                            token: res.token,
+                        };
+                    } else {
+                        return null;
                     }
                 }
-                //console.log(res)
-                /*const user = { id: '1', name: 'Admin', email: credentials.email };
-                if (credentials.email === 'admin@example.com' && credentials.password === 'password') {
-                    return user;
-                }*/
                 return null;
             }
         })
@@ -106,15 +89,16 @@ const authOptions: NextAuthOptions = {
 
     callbacks: {
         async jwt({ token, user }) {
-            
             if (user) {
                 token.id = user.id;
+                //token.token = user.token;
             }
             return token;
         },
         async session({ session, token }) {
             if (session?.user && token?.id) {
-                session.user.id = token.id as string;  // Añadimos el id de token a session.user
+                session.user.id = token.id as string;
+                session.user.token = token.token as string;
             }
             return session;
         },
@@ -124,8 +108,7 @@ const authOptions: NextAuthOptions = {
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
 
-const validateUser=async(url:string,query:any)=>{
-    console.log(JSON.stringify(query))
+const validateUser = async (url: string, query: { email: string; password: string; }): Promise<User | null> => {
     const res = await fetch(url, {
         method: 'POST',
         headers: { 
@@ -133,13 +116,13 @@ const validateUser=async(url:string,query:any)=>{
             "Accept": "application/json", 
         },
         body: JSON.stringify(query),
-    })
+    });
+
     if (!res.ok) {
-        const errorMessage = await res.text();  // Lee el contenido del error
-        console.error('Error al autenticar:', errorMessage);
+        console.error('Error al autenticar:', await res.text());
         return null;
-        //throw new Error(`Failed to authenticate user: ${errorMessage}`);
     }
-    console.log('RESPONSE',res);
-    return res
-}
+
+    const data = await res.json();
+    return data as User;
+};
