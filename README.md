@@ -1,6 +1,10 @@
 
 # My E-commerce Project
 
+## Documentación Adicional
+
+Para mantener la consistencia en el desarrollo del admin y el storefront, consulta la guía de estilo y estructura de código en [README_STYLE_GUIDE.md](README_STYLE_GUIDE.md).
+
 ---
 
 Este proyecto es un sistema e-commerce compuesto de un backend en Symfony y dos frontends separados: uno para la parte de administración (**Admin**) y otro para la tienda pública (**Storefront**). Todo está estructurado y orquestado en un entorno de Docker-compose.
