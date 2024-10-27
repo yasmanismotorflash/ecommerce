@@ -73,7 +73,7 @@ project-root/
 
 4. **Espaciado**: Usa 2 espacios para la indentación y asegúrate de que no haya espacios en blanco innecesarios.
 
-5. **Comentarios**: Documenta secciones complejas del código en inglés, usando comentarios que expliquen el propósito y funcionamiento.
+5. **Comentarios**: Documenta secciones complejas del código en español, usando comentarios que expliquen el propósito y funcionamiento.
 
 6. **Manejo de Errores**: Todas las funciones de llamada a APIs deben manejar errores con un `try-catch` y devolver un mensaje de error amigable en caso de fallo.
 
