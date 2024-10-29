@@ -11,7 +11,7 @@ declare module 'next-auth' {
             name?: string | null;
             email?: string | null;
             image?: string | null;
-            token?: string | null;
+            token: string | null;
         }
     }
 }
@@ -25,7 +25,7 @@ interface User {
     id: string;
     email?: string;
     name?: string;
-    token?: string;
+    token: string;
     error?: string;
 }
 
@@ -61,6 +61,7 @@ const authOptions: NextAuthOptions = {
                     .safeParse(credentials);
 
                 if (parsedCredentials.success) {
+
                     const URI = process.env.API_URL;
                     const { email, password } = parsedCredentials.data;
                     const query = { email, password };
@@ -70,12 +71,13 @@ const authOptions: NextAuthOptions = {
                     }
 
                     const res = await validateUser(`${URI}/auth`, query);
-
+                    console.log('RES',res)
                     if (res && !res.error) {
+                        
                         return {
-                            id: res.id ?? "", // Asegura que `id` siempre sea un string
-                            email: res.email,
-                            name: res.name,
+                            id: "",//res.id ?? "",
+                            email: "admin@backend.local",//res.email,
+                            name: "SysAdmin",//res.name,
                             token: res.token,
                         };
                     } else {
@@ -91,6 +93,7 @@ const authOptions: NextAuthOptions = {
         async jwt({ token, user }) {
             if (user) {
                 token.id = user.id;
+                token.name = user.name;
                 //token.token = user.token;
             }
             return token;
@@ -98,7 +101,7 @@ const authOptions: NextAuthOptions = {
         async session({ session, token }) {
             if (session?.user && token?.id) {
                 session.user.id = token.id as string;
-                session.user.token = token.token as string;
+                session.user.name = token.name as string;
             }
             return session;
         },
@@ -109,6 +112,7 @@ const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
 
 const validateUser = async (url: string, query: { email: string; password: string; }): Promise<User | null> => {
+    console.log(url, query);
     const res = await fetch(url, {
         method: 'POST',
         headers: { 

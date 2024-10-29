@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-interface MfImagenProps {
+interface MfImageProps {
   src: string;         
   alt: string;         
   height?: number;      
@@ -11,7 +11,7 @@ interface MfImagenProps {
 }
 
 // Componente MfImagen
-const MfImagen: React.FC<MfImagenProps> = ({ src, alt, height, width, className, style, ...props }) => {
+const MfImage: React.FC<MfImageProps> = ({ src, alt, height, width, className, style, ...props }) => {
   return (
     <div className={className} style={style}>
       <Image
@@ -25,4 +25,4 @@ const MfImagen: React.FC<MfImagenProps> = ({ src, alt, height, width, className,
   );
 };
 
-export default MfImagen;
+export default MfImage;

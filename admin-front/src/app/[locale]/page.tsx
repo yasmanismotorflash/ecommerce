@@ -1,20 +1,21 @@
 'use client';
 
+import React from 'react';
 import { useTranslations } from 'next-intl';
-import Sidebar from '@/components/ui/mf/sidebar';
+import MfSidebar from '@/components/ui/mf/MFSidebar/MfSidebar';
 
 export default function HomePage() {
-  const t = useTranslations('HomePage');
-  
-  return (
-    <div className="flex min-h-screen">
-      {/* Sidebar */}
-      <Sidebar />
+    const t = useTranslations('HomePage');
 
-      {/* Contenido principal */}
-      <div className="flex-1 p-10 bg-white sm:ml-60">
-        <h1 className="text-3xl font-bold mb-8">{t("title")}</h1>
-      </div>
-    </div>
-  );
+    return (
+        <div className="flex min-h-screen">
+            {/* Sidebar */}
+            <MfSidebar />
+
+            {/* Contenido principal */}
+            <div className="flex-1 p-10 bg-white ">
+                <h1 className="text-3xl font-bold mb-8">{t('title')}</h1>
+            </div>
+        </div>
+    );
 }
