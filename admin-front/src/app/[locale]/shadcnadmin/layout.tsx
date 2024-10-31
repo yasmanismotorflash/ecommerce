@@ -1,8 +1,10 @@
 // LocaleLayout.tsx (Componente Principal)
 import React from 'react';
-import LocaleLayoutServer from './LocaleLayoutServer';
-import LocaleLayoutClient from './LocaleLayoutClient';
-import './globals.css';
+import LocaleLayoutServer from '../LocaleLayoutServer';
+import LocaleLayoutClient from '../LocaleLayoutClient';
+import '../globals.css';
+import {SidebarProvider} from "@/components/ui/sidebar";
+import {AppSidebar} from "@/components/ui/app-sidebar";
 
 export default async function LocaleLayout({
     children,
@@ -15,7 +17,10 @@ export default async function LocaleLayout({
 
     return (
         <LocaleLayoutClient messages={messages} locale={locale}>
-            {children}
+            <SidebarProvider>
+                <AppSidebar/>
+                {children}
+            </SidebarProvider>
         </LocaleLayoutClient>
     );
 }

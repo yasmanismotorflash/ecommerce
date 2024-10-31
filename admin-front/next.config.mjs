@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 const nextConfig = {
     transpilePackages: ['mf-front'], 
     images: {
-        domains: ['images.motorflash.com']
+        domains: ['images.motorflash.com','images.unsplash.com']
     },
     webpack: (config) => {
         config.resolve.alias = {
