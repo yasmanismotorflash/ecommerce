@@ -7,7 +7,8 @@ import { useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { MfSkeleton } from '@/components/ui/mf/MfSkeleton/MfSkeleton';
 import { Spinner } from '@/components/ui/spinner';
-import MfSidebar from '@/components/ui/mf/MFSidebar/MfSidebar';
+import { MfSidebar } from '@/components/ui/mf/MfSidebar/MfSidebar';
+
 
 export default function AdminPage() {
     const t = useTranslations('AdminPage');

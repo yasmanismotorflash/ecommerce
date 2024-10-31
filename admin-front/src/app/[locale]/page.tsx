@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import MfSidebar from '@/components/ui/mf/MFSidebar/MfSidebar';
+import { MfSidebar } from '@/components/ui/mf/MfSidebar/MfSidebar';
 
 export default function HomePage() {
     const t = useTranslations('HomePage');
