@@ -2,7 +2,7 @@
 import React from 'react';
 import LocaleLayoutServer from '../LocaleLayoutServer';
 import LocaleLayoutClient from '../LocaleLayoutClient';
-import './globals.css';
+import '../globals.css';
 import {SidebarProvider} from "@/components/ui/sidebar";
 import {AppSidebar} from "@/components/ui/app-sidebar";
 
