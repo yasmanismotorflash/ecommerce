@@ -8,7 +8,7 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table";
-import RenderTableHeader from "./renderTableHeader";
+//import RenderTableHeader from "./renderTableHeader";
   
 
 //import RenderTableRow from "./RenderTableRow";
@@ -28,7 +28,7 @@ interface Props {
 
 function Dtable(props:Props){
     
-    const {res,/*config,Item,*/paramSource}=props;
+    const {res,/*config,Item,paramSource*/}=props;
     //const data = res.data;
     console.log(res);
     
@@ -39,7 +39,7 @@ function Dtable(props:Props){
                 <TableCaption>Listado de anuncios.</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <RenderTableHeader paramSource={paramSource} />                   
+                                         
                     </TableRow>
                 </TableHeader>
                 <TableBody>
