@@ -1,17 +1,9 @@
 import React /*, { useState, ReactNode, MouseEventHandler }*/ from 'react';
 
-import {
-    IoBarChart,
-    IoCog,
-    IoCreate,
-    IoDocument,
-    IoDocuments,
-    IoPersonCircle,
-} from 'react-icons/io5';
-import MfSidebarUserTag from './MfSidebarUserTag';
+/*import MfSidebarUserTag from './MfSidebarUserTag';
 import MfSidebarButton from './MfSidebarButton';
 import MfSidebarUserMenu from './MfSidebarUserMenu';
-import MfSidebarDropdown from './MfSidebarDropDown';
+import MfSidebarDropdown from './MfSidebarDropDown';*/
 /*import {
     ListBulletIcon,
     PlusCircledIcon,
@@ -229,54 +221,6 @@ export function MfSidebar() {
                             </svg>
                         </span>
                     </button>
-                </div>
-                <MfSidebarUserTag />
-                <div className="m-4">
-                    <ul className="mb-4 flex flex-col gap-1">
-                        <li>
-                            <MfSidebarButton
-                                url={'admin'}
-                                title={'Dashboard'}
-                                icon={<IoBarChart size={24} />}
-                            />
-                        </li>
-                        <li>
-                            <MfSidebarButton
-                                url={'admin/users'}
-                                title={'Usuarios'}
-                                icon={<IoPersonCircle size={24} />}
-                            />
-                        </li>
-                        <MfSidebarDropdown
-                            title={'Páginas'}
-                            icon={<IoDocuments size={24} />}
-                        >
-                            <ul>
-                                <li>
-                                    <MfSidebarButton
-                                        url={'#'}
-                                        title={'Landing'}
-                                        icon={<IoDocument size={24} />}
-                                    />
-                                </li>
-                                <li>
-                                    <MfSidebarButton
-                                        url={'#'}
-                                        title={'Blogs'}
-                                        icon={<IoCreate size={24} />}
-                                    />
-                                </li>
-                            </ul>
-                        </MfSidebarDropdown>
-                        <li>
-                            <MfSidebarButton
-                                url={'#'}
-                                title={'Ajustes'}
-                                icon={<IoCog size={24} />}
-                            />
-                        </li>
-                    </ul>
-                    <MfSidebarUserMenu />
                 </div>
             </aside>
         </>
