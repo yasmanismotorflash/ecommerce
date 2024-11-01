@@ -1,7 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { z } from 'zod';
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import { RequestInternal } from 'next-auth';
+import {z} from 'zod';
+import NextAuth, {NextAuthOptions} from 'next-auth';
+import {RequestInternal} from 'next-auth';
 
 // Extiende el tipo de `session.user` para incluir la propiedad `id`
 declare module 'next-auth' {
@@ -42,11 +42,11 @@ const authOptions: NextAuthOptions = {
             id: 'credentials',
             name: 'Credentials',
             credentials: {
-                email: { label: 'email', type: 'text' },
-                password: { label: 'password', type: 'password' },
+                email: {label: 'email', type: 'text'},
+                password: {label: 'password', type: 'password'},
             },
             async authorize(
-                credentials: Record<"email" | "password", string> | undefined, 
+                credentials: Record<"email" | "password", string> | undefined,
                 req: Pick<RequestInternal, "body" | "query" | "headers" | "method">
             ): Promise<User | null> {  // Cambio a Promise<User | null>
                 if (!credentials) {
@@ -54,26 +54,26 @@ const authOptions: NextAuthOptions = {
                 }
                 console.log(req);
                 const parsedCredentials = z
-                    .object({ 
+                    .object({
                         email: z.string().email(),
-                        password: z.string().min(3) 
+                        password: z.string().min(3)
                     })
                     .safeParse(credentials);
-                    if (parsedCredentials.success) {
-                        
-                        const URI = process.env.API_URL;
-                        const { email, password } = parsedCredentials.data;
-                        const query = { email, password };
-                        
-                        if (!URI) {
-                            throw new Error('There is no URI!!');
-                        }
-                        console.log('PARSE',parsedCredentials)
-                        
+                if (parsedCredentials.success) {
+
+                    const URI = process.env.API_URL;
+                    const {email, password} = parsedCredentials.data;
+                    const query = {email, password};
+
+                    if (!URI) {
+                        throw new Error('There is no URI!!');
+                    }
+                    console.log('PARSE', parsedCredentials)
+
                     const res = await validateUser(`${URI}/auth`, query);
-                    
-                    
-                    console.log('RES',res)
+
+
+                    console.log('RES', res)
                     if (res && !res.error) {
                         return {
                             id: "",//res.id ?? "",
@@ -91,7 +91,7 @@ const authOptions: NextAuthOptions = {
     ],
 
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({token, user}) {
             if (user) {
                 token.id = user.id;
                 token.name = user.name;
@@ -99,7 +99,7 @@ const authOptions: NextAuthOptions = {
             }
             return token;
         },
-        async session({ session, token }) {
+        async session({session, token}) {
             if (session?.user && token?.id) {
                 session.user.id = token.id as string;
                 session.user.name = token.name as string;
@@ -110,17 +110,17 @@ const authOptions: NextAuthOptions = {
 };
 
 const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
+export {handler as GET, handler as POST};
 
 const validateUser = async (url: string, query: { email: string; password: string; }): Promise<User | null> => {
-    
+
     const res = await fetch(url, {
         method: 'POST',
-        headers: { 
+        headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json", 
+            "Accept": "application/json",
         },
-        body:JSON.stringify(query),
+        body: JSON.stringify(query),
     });
 
     if (!res.ok) {
@@ -130,5 +130,5 @@ const validateUser = async (url: string, query: { email: string; password: strin
 
     const data = await res.json();
     return data as User;
-    
+
 };
