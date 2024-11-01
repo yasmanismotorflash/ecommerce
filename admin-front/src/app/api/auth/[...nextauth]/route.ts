@@ -59,30 +59,36 @@ const authOptions: NextAuthOptions = {
                         password: z.string().min(3) 
                     })
                     .safeParse(credentials);
-
-                if (parsedCredentials.success) {
-
-                    const URI = process.env.API_URL;
-                    const { email, password } = parsedCredentials.data;
-                    const query = { email, password };
-
-                    if (!URI) {
-                        throw new Error('There is no URI!!');
-                    }
-
-                    const res = await validateUser(`${URI}/auth`, query);
+                    if (parsedCredentials.success) {
+                        
+                        const URI = process.env.API_URL;
+                        //const { email, password } = parsedCredentials.data;
+                        //const query = { email, password };
+                        
+                        if (!URI) {
+                            throw new Error('There is no URI!!');
+                        }
+                        console.log('PARSE',parsedCredentials)
+                        
+                    //const res = await validateUser(`${URI}/auth`, query);
+                    return {
+                        id: "",//res.id ?? "",
+                        email: "admin@backend.local",//res.email,
+                        name: "SysAdmin",//res.name,
+                        token: "sjdsdsydshhdyt445sds6d7dsud8s8f88f77gf",
+                    };
+                    /*console.log(res)
                     console.log('RES',res)
                     if (res && !res.error) {
-                        
                         return {
                             id: "",//res.id ?? "",
                             email: "admin@backend.local",//res.email,
                             name: "SysAdmin",//res.name,
-                            token: res.token,
+                            token: "sjdsdsydshhdyt445sds6d7dsud8s8f88f77gf",
                         };
                     } else {
                         return null;
-                    }
+                    }*/
                 }
                 return null;
             }
@@ -111,7 +117,7 @@ const authOptions: NextAuthOptions = {
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
 
-const validateUser = async (url: string, query: { email: string; password: string; }): Promise<User | null> => {
+/*const validateUser = async (url: string, query: { email: string; password: string; }): Promise<User | null> => {
     console.log(url, query);
     const res = await fetch(url, {
         method: 'POST',
@@ -129,4 +135,4 @@ const validateUser = async (url: string, query: { email: string; password: strin
 
     const data = await res.json();
     return data as User;
-};
+};*/

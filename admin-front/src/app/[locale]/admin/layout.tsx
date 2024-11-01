@@ -19,7 +19,7 @@ export default async function LocaleLayout({
         <LocaleLayoutClient messages={messages} locale={locale}>
             <SidebarProvider>
                 <AppSidebar/>
-                <main>
+                <main className='w-full'>
                     <SidebarTrigger />
                     {children}
                 </main>

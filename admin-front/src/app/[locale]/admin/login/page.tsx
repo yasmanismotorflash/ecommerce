@@ -6,9 +6,11 @@ import { useRouter } from 'next/navigation';
 import MfInput from '@/components/ui/mf/MfInput/MfInput';
 import MfButton from '@/components/ui/mf/MfButton/MfButton';
 import { PersonIcon } from '@radix-ui/react-icons';
+import { useLocale } from 'next-intl';
 export default function LoginPage() {
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
+    const locale = useLocale();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -29,7 +31,7 @@ export default function LoginPage() {
             setError(error);
         } else {
             setError(null);
-            router.push('/admin'); //Redirige al dashboard después del login
+            router.push(`/${locale}/admin`); //Redirige al dashboard después del login
         }
     };
 

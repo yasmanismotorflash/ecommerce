@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { MfSkeleton } from '@/components/ui/mf/MfSkeleton/MfSkeleton';
 import { Spinner } from '@/components/ui/spinner';
-import { MfSidebar } from '@/components/ui/mf/MfSidebar/MfSidebar';
 
 
 export default function AdminPage() {
@@ -42,7 +41,6 @@ export default function AdminPage() {
 
     return (
         <div className="flex min-h-screen">
-            <MfSidebar />
 
             {/* Contenido principal */}
             <div className="flex-1 p-5 bg-white ">
