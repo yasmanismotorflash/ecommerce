@@ -1,5 +1,4 @@
 import React from "react"
-import { Calendar, Home, Inbox, Search, Settings, User2 } from "lucide-react"
 
 import {
   Sidebar,
@@ -15,34 +14,40 @@ import {
 } from "@/components/ui/sidebar"
 
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { ChevronUpIcon } from "@radix-ui/react-icons";
+import { 
+  ChevronUpIcon,
+  PersonIcon, 
+  FileTextIcon,
+  Pencil2Icon, 
+  ChevronDownIcon,
+  ExitIcon
+} from "@radix-ui/react-icons";
+import MfAction from "./mf/MfAction/MfAction";
+import Link from "next/link";
 
 // Menu items.
 const items = [
   {
-    title: "Home",
+    title: "Usuario",
     url: "#",
-    icon: Home,
+    icon: PersonIcon,
   },
   {
-    title: "Inbox",
+    title: "Páginas",
     url: "#",
-    icon: Inbox,
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
+    icon: FileTextIcon,
+    submenu: [
+      {
+        title: "Landing",
+        url: "#",
+        icon: FileTextIcon,
+      },
+      {
+        title: "Blog",
+        url: "#",
+        icon: Pencil2Icon,
+      },  
+    ]
   },
 ]
 
@@ -62,14 +67,41 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem key={item.title} >
-                  <SidebarMenuButton asChild className="text-lg">
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                  
+                  item.submenu? 
+                    <DropdownMenu key={item.title}>
+                      <DropdownMenuTrigger asChild>
+                        <SidebarMenuButton className="text-lg" >
+                          <item.icon /> {item.title}
+                          <ChevronDownIcon className="ml-auto" />
+                        </SidebarMenuButton>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        side="bottom"
+                        className="w-[--radix-popper-anchor-width]"
+                      >
+                        {
+                          item.submenu.map((subitem) => (
+                            <DropdownMenuItem key = {subitem.title} >
+                              <Link href={subitem.url} className="flex  items-center " >
+                                <subitem.icon className="pr-2 size-6 font-bold" /> 
+                                <span className="text-lg font-bold text-gray-700" >{subitem.title}</span>
+                              </Link>
+                            </DropdownMenuItem>
+                          ))
+                        }
+                        
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  :<SidebarMenuItem key={item.title} >
+                    <SidebarMenuButton asChild className="text-lg">
+                      <a href={item.url}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </a>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
@@ -81,7 +113,7 @@ export function AppSidebar() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton>
-                    <User2 /> Usuario
+                    <PersonIcon /> Usuario
                     <ChevronUpIcon className="ml-auto" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
@@ -90,7 +122,7 @@ export function AppSidebar() {
                   className="w-[--radix-popper-anchor-width]"
                 >
                   <DropdownMenuItem >
-                    <span>Salir</span>
+                    <ExitIcon /> <MfAction title='Salir' action='signOut' />
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

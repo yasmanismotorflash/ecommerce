@@ -62,22 +62,17 @@ const authOptions: NextAuthOptions = {
                     if (parsedCredentials.success) {
                         
                         const URI = process.env.API_URL;
-                        //const { email, password } = parsedCredentials.data;
-                        //const query = { email, password };
+                        const { email, password } = parsedCredentials.data;
+                        const query = { email, password };
                         
                         if (!URI) {
                             throw new Error('There is no URI!!');
                         }
                         console.log('PARSE',parsedCredentials)
                         
-                    //const res = await validateUser(`${URI}/auth`, query);
-                    return {
-                        id: "",//res.id ?? "",
-                        email: "admin@backend.local",//res.email,
-                        name: "SysAdmin",//res.name,
-                        token: "sjdsdsydshhdyt445sds6d7dsud8s8f88f77gf",
-                    };
-                    /*console.log(res)
+                    const res = await validateUser(`${URI}/auth`, query);
+                    
+                    
                     console.log('RES',res)
                     if (res && !res.error) {
                         return {
@@ -88,7 +83,7 @@ const authOptions: NextAuthOptions = {
                         };
                     } else {
                         return null;
-                    }*/
+                    }
                 }
                 return null;
             }
@@ -117,15 +112,15 @@ const authOptions: NextAuthOptions = {
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
 
-/*const validateUser = async (url: string, query: { email: string; password: string; }): Promise<User | null> => {
-    console.log(url, query);
+const validateUser = async (url: string, query: { email: string; password: string; }): Promise<User | null> => {
+    
     const res = await fetch(url, {
         method: 'POST',
         headers: { 
             "Content-Type": "application/json",
             "Accept": "application/json", 
         },
-        body: JSON.stringify(query),
+        body:JSON.stringify(query),
     });
 
     if (!res.ok) {
@@ -135,4 +130,5 @@ export { handler as GET, handler as POST };
 
     const data = await res.json();
     return data as User;
-};*/
+    
+};
