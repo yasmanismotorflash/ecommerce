@@ -16,6 +16,7 @@ La estructura del proyecto es la siguiente:
 ```
 /ecommerce
     /admin-front        # Frontend de administración en Next.js
+    /admin              # Frontend de administración en Next.js version 15
     /storefront         # Frontend de la tienda en Next.js
     /backend            # Backend en Symfony (PHP 8.3)
     /docker             # Configuraciones específicas para Docker
@@ -61,6 +62,7 @@ Para que los dominios locales **storefront.local** y **admin.local** funcionen, 
 ```
 127.0.0.1 storefront.local
 127.0.0.1 admin.local
+127.0.0.1 admin15.local
 127.0.0.1 backend.local
 
 ```
