@@ -68,7 +68,7 @@ services:
       - services-net
 
   # Frontend Admin (Next.js)
-  admin:
+  admin_dev:
     build:
       context: ./admin-front
       dockerfile: Dockerfile
@@ -84,13 +84,13 @@ services:
       - NODE_ENV=development
     networks:
       - services-net
-      -
+
   # Frontend Admin (Next.js)
-  admin15:
+  admin_prod:
     build:
       context: ./admin
       dockerfile: Dockerfile
-    container_name: admin15_app
+    container_name: admin_prod
     restart: unless-stopped
     ports:
       - "3012:3000"
@@ -112,8 +112,8 @@ services:
       - "80:80"
     depends_on:
       - storefront
-      - admin
-      - admin15
+      - admin_dev
+      - admin_prod
       - backend
     volumes:
       - ./docker/nginx/virtualhosts:/etc/nginx/conf.d

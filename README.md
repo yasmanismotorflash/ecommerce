@@ -62,7 +62,7 @@ Para que los dominios locales **storefront.local** y **admin.local** funcionen, 
 ```
 127.0.0.1 storefront.local
 127.0.0.1 admin.local
-127.0.0.1 admin15.local
+127.0.0.1 admin_prod.local
 127.0.0.1 backend.local
 
 ```
@@ -81,6 +81,7 @@ Esto descargará las imágenes necesarias, construirá los servicios y levantar�
 
 - **Storefront**: [http://storefront.local](http://storefront.local)
 - **Admin**: [http://admin.local](http://admin.local)
+- **Admin Prod**: [http://admin_prod.local](http://admin_prod.local)
 - **Backend Symfony**: [http://backend.local](http://localhost:8000)
 
 ### 5. Conexión a la Base de Datos
