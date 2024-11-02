@@ -1,11 +1,15 @@
-'use client';
+
 
 import React from 'react';
-import { useTranslations } from 'next-intl';
 import { MfSidebar } from '@/components/ui/mf/MfSidebar/MfSidebar';
+import { getLocales } from '@/lib';
+import { redirect } from 'next/navigation';
+import { getLocale } from 'next-intl/server';
 
-export default function HomePage() {
-    const t = useTranslations('HomePage');
+export default async function HomePage() {
+    const  locale  = await getLocale();
+    console.log(locale);
+    redirect(`/${locale}/admin`);
 
     return (
         <div className="flex min-h-screen">

@@ -1,0 +1,13 @@
+{
+  "HomePage": {
+    "title": "Hola mundo"
+  },
+  "AdminPage":{
+    "title": "Bienvenido {name}",
+    "message": "Este es el panel de administración para la configuración regional {locale}"
+
+  },
+  "UsersPage": {
+    "title": "Listado de Usuarios"
+  }
+}
