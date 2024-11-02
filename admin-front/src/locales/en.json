@@ -1,0 +1,15 @@
+
+{
+  "HomePage": {
+    "title": "¡Hello world!",
+    "about": "Go to the about page"
+  },
+  "AdminPage":{
+    "title": "Welcome, {name}",
+    "message": "This is the admin dashboard for {locale} locale"
+
+  },
+  "UsersPage": {
+    "title": "Users List"
+  }
+}
