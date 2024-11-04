@@ -8,7 +8,6 @@ import { useLocale } from 'next-intl';
 import { MfSkeleton } from '@/components/ui/mf/MfSkeleton/MfSkeleton';
 import { Spinner } from '@/components/ui/spinner';
 
-
 export default function AdminPage() {
     const t = useTranslations('AdminPage');
     const { data: session, status } = useSession();
@@ -20,13 +19,13 @@ export default function AdminPage() {
         }
         if (status === 'unauthenticated') {
             // Redirige teniendo en cuenta el idioma
-            router.push(`/${locale}/admin/login`);
+            router.push(`/${locale}/login`);
         }
     }, [status, router, locale]);
 
     if (status === 'loading') {
         return (
-            <div className="flex w-screen h-screen justify-center items-center ">
+            <div className="flex w-screen h-screen justify-center items-center fixed z-9999">
                 <div className="flex rounded-2xl shadow-lg shadow-gray-400 p-8 bg-gray-100">
                     <Spinner size="small" />{' '}
                     <span className="ml-4 text-xl">Cargando...</span>
