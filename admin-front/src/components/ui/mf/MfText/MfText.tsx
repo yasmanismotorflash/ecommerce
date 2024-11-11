@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { MfContainer } from '../MfContainer/MfContainer';
+import { MfContainer } from '../Container/Container';
 
 interface TextProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     label?: string;

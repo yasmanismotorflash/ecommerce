@@ -43,7 +43,7 @@ export default function AdminPage() {
         <div className="flex min-h-screen">
 
             {/* Contenido principal */}
-            <div className="flex-1 p-5 bg-white ">
+            <div className="flex-1 p-5 bg-white w-full">
                 <h1 className="text-3xl font-bold mb-8">
                     {t('title', { name: session.user?.name })}
                 </h1>

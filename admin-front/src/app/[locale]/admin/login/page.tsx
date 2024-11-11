@@ -3,7 +3,7 @@ import React from 'react';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import MfInput from '@/components/ui/mf/MfInput/MfInput';
+import MfInput from '@/components/ui/mf/Input/Input';
 import MfButton from '@/components/ui/mf/MfButton/MfButton';
 import { PersonIcon } from '@radix-ui/react-icons';
 import { useLocale } from 'next-intl';

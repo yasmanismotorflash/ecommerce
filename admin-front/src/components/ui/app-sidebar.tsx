@@ -49,6 +49,11 @@ const items = [
       },  
     ]
   },
+  {
+    title: "Ajustes",
+    url: "/admin/adjustments",
+    icon: PersonIcon,
+  },
 ]
 
 export function AppSidebar() {
