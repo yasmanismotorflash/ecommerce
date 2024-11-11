@@ -3,10 +3,10 @@ import React from 'react';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import MfInput from '@/components/ui/mf/Input/Input';
-import MfButton from '@/components/ui/mf/MfButton/MfButton';
 import { PersonIcon } from '@radix-ui/react-icons';
 import { useLocale } from 'next-intl';
+import { Input } from '@/components/ui/mf';
+import { Button } from '@/components/ui/button';
 export default function LoginPage() {
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
@@ -46,26 +46,26 @@ export default function LoginPage() {
                     onSubmit={handleSubmit}
                     className="flex flex-col justify-center w-full"
                 >
-                    <MfInput
+                    <Input
                         type="email"
                         name="email"
                         placeholder="Email"
                         required
                         className=" border-gray-500"
                     />
-                    <MfInput
+                    <Input
                         type="password"
                         name="password"
                         placeholder="Password"
                         required
                         className=" border-gray-500"
                     />
-                    <MfButton
+                    <Button
                         type="submit"
                         className="hover:bg-gray-700 hover:text-white w-full"
                     >
                         Entrar
-                    </MfButton>
+                    </Button>
                 </form>
                 {error && <p>{error}</p>}
             </div>

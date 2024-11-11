@@ -62,8 +62,8 @@ const authOptions: NextAuthOptions = {
                 if (parsedCredentials.success) {
 
                     const URI = process.env.API_URL;
-                    const {email, password} = parsedCredentials.data;
-                    const query = {email, password};
+                    //const {email, password} = parsedCredentials.data;
+                    //const query = {email, password};
 
                     if (!URI) {
                         throw new Error('There is no URI!!');
@@ -78,11 +78,11 @@ const authOptions: NextAuthOptions = {
                         token: "sjdsdsydshhdyt445sds6d7dsud8s8f88f77gf",
                     };
 
-                    const res = await validateUser(`${URI}/auth`, query);
+                    /*const res = await validateUser(`${URI}/auth`, query);
 
 
                     console.log('RES', res)
-                    if (res && !res.error) {
+                    if (res && res!==null && !res.error ) {
                         return {
                             id: "",//res.id ?? "",
                             email: "admin@backend.local",//res.email,
@@ -91,7 +91,7 @@ const authOptions: NextAuthOptions = {
                         };
                     } else {
                         return null;
-                    }
+                    }*/
                 }
                 return null;
             }
@@ -120,7 +120,7 @@ const authOptions: NextAuthOptions = {
 const handler = NextAuth(authOptions);
 export {handler as GET, handler as POST};
 
-const validateUser = async (url: string, query: { email: string; password: string; }): Promise<User | null> => {
+/*const validateUser = async (url: string, query: { email: string; password: string; }): Promise<User | null> => {
 
     const res = await fetch(url, {
         method: 'POST',
@@ -139,4 +139,4 @@ const validateUser = async (url: string, query: { email: string; password: strin
     const data = await res.json();
     return data as User;
 
-};
+};*/
