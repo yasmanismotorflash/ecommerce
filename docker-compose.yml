@@ -17,7 +17,7 @@ services:
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
     ports:
-      - "3308:3306"
+      - "127.0.0.1:3308:3306"
     networks:
       - services-net
 
@@ -36,7 +36,7 @@ services:
     container_name: backend_php
     restart: unless-stopped
     ports:
-      - "8010:80"
+      - "127.0.0.1:8010:80"
     volumes:
       - ./backend:/var/www/backend
     working_dir: /var/www/backend
@@ -57,7 +57,7 @@ services:
     container_name: storefront_app
     restart: unless-stopped
     ports:
-      - "3010:3000"
+      - "127.0.0.1:3010:3000"
     volumes:
       - ./storefront:/usr/src/app
     depends_on:
@@ -75,7 +75,7 @@ services:
     container_name: admin_app
     restart: unless-stopped
     ports:
-      - "3011:3000"
+      - "127.0.0.1:3011:3000"
     volumes:
       - ./admin-front:/usr/src/app
     depends_on:
@@ -93,7 +93,7 @@ services:
     container_name: admin_prod
     restart: unless-stopped
     ports:
-      - "3012:3000"
+      - "127.0.0.1:3012:3000"
     volumes:
       - ./admin:/usr/src/app
     depends_on:
@@ -109,7 +109,7 @@ services:
     container_name: nginx_proxy
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "127.0.0.1:80:80"
     depends_on:
       - storefront
       - admin_dev
