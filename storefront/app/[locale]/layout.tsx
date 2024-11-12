@@ -9,6 +9,8 @@ type Props = {
   params: {locale: string};
 };
 
+type Locale = 'en' | 'es';
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
 }
@@ -28,7 +30,7 @@ export default async function LocaleLayout({
   params: {locale}
 }: Props) {
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale as Locale)) {
     notFound();
   }
 
