@@ -3,7 +3,7 @@ import {Inter} from 'next/font/google';
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import {ReactNode} from 'react';
-import Navigation from '@/components/Navigation';
+import Navigation from '@/components/base/ui/navigation/Navigation';
 
 const inter = Inter({subsets: ['latin']});
 

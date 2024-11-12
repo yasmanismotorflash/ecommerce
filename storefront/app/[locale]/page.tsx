@@ -1,7 +1,7 @@
 
 import {setRequestLocale} from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
-import PageLayout from '@/components/PageLayout';
+import PageLayout from '@/components/base/ui/layout/PageLayout';
 
 type Params = Promise<{ locale: string }>
 

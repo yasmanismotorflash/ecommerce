@@ -5,14 +5,14 @@
   },
   "IndexPage": {
     "description": "Este es un ejemplo básico que demuestra el uso de <code>next-intl</code> con el App Router de Next.js. Intenta cambiar el idioma en la esquina superior derecha y observa cómo cambia el contenido.",
-    "title": "Ejemplo de next-intl"
+    "title": "Tienda"
   },
   "LocaleLayout": {
     "title": "Ejemplo de next-intl"
   },
   "LocaleSwitcher": {
     "label": "Cambiar idioma",
-    "locale": "{locale, select, de {🇩🇪 Alemán} en {🇺🇸 Inglés} other {Desconocido}}"
+    "locale": "{locale, select, es {🇪🇸 Español} en {🇺🇸 Inglés} other {Desconocido}}"
   },
   "Manifest": {
     "name": "Ejemplo de next-intl"
@@ -40,7 +40,7 @@
     }
   },
   "PathnamesPage": {
-    "description": "<p>Los nombres de rutas también están internacionalizados.</p><p>Si estás usando el idioma predeterminado, inglés, verás <code>/en/pathnames</code> en la barra de direcciones del navegador en esta página.</p><p>Si cambias el idioma a alemán, la URL se localiza en consecuencia (<code>/de/pfadnamen</code>).</p>",
+    "description": "<p>Los nombres de rutas también están internacionalizados.</p><p>Si estás usando el idioma predeterminado, inglés, verás <code>/en/pathnames</code> en la barra de direcciones del navegador en esta página.</p><p>Si cambias el idioma a español, la URL se localiza en consecuencia (<code>/es/nombres-de-rutas</code>).</p>",
     "title": "Nombres de rutas"
   }
 }
