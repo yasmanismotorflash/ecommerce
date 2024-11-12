@@ -1,7 +1,7 @@
 import {notFound} from 'next/navigation';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {ReactNode} from 'react';
-import BaseLayout from '@/components/base/ui/layout/BaseLayout';
+import BaseLayoutResult from '@/components/results/layout/BaseLayoutResult';
 import {routing} from '@/i18n/routing';
 
 type Props = {
@@ -37,5 +37,5 @@ export default async function LocaleLayout({
   // Enable static rendering
   setRequestLocale(locale);
 
-  return <BaseLayout locale={locale}>{children}</BaseLayout>;
+  return <BaseLayoutResult locale={locale}>{children}</BaseLayoutResult>;
 }

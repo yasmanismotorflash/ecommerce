@@ -1,7 +1,7 @@
 
 import {setRequestLocale} from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
-import PageLayout from '@/components/base/ui/layout/PageLayout';
+import PageResultLayout from "@/components/results/layout/PageResultLayout";
 
 type Params = Promise<{ locale: string }>
 
@@ -14,7 +14,7 @@ export default async function DefaultPage({params}: {
     const t = await getTranslations('IndexPage');
 
     return (
-        <PageLayout title={t('title')}>
+        <PageResultLayout title={t('title')}>
             <p className="max-w-[590px]">
                 {t.rich('description', {
                     code: (chunks) => (
@@ -22,6 +22,6 @@ export default async function DefaultPage({params}: {
                     )
                 })}
             </p>
-        </PageLayout>
+        </PageResultLayout>
     );
 }
