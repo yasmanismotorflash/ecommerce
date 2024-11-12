@@ -9,8 +9,7 @@ export default function Navigation() {
     <div className="bg-slate-850">
       <nav className="container flex justify-between p-2 text-white">
         <div>
-          <NavigationLink href="/v2/ecommerce/storefront/public">{t('home')}</NavigationLink>
-          <NavigationLink href="/pathnames">{t('pathnames')}</NavigationLink>
+
         </div>
         <LocaleSwitcher />
       </nav>

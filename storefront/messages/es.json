@@ -14,9 +14,6 @@
     "label": "Cambiar idioma",
     "locale": "{locale, select, es {🇪🇸 Español} en {🇺🇸 Inglés} other {Desconocido}}"
   },
-  "Manifest": {
-    "name": "Ejemplo de next-intl"
-  },
   "Navigation": {
     "home": "Inicio",
     "pathnames": "Nombres de rutas"
@@ -24,23 +21,5 @@
   "NotFoundPage": {
     "description": "Por favor, revisa la barra de direcciones del navegador o usa la navegación para ir a una página conocida.",
     "title": "Página no encontrada"
-  },
-  "PageLayout": {
-    "links": {
-      "docs": {
-        "description": "Aprende más sobre next-intl en la documentación oficial.",
-        "href": "https://next-intl-docs.vercel.app/",
-        "title": "Documentación"
-      },
-      "source": {
-        "description": "Explora el código fuente de este ejemplo en GitHub.",
-        "href": "https://github.com/amannn/next-intl/tree/main/examples/example-app-router",
-        "title": "Código fuente"
-      }
-    }
-  },
-  "PathnamesPage": {
-    "description": "<p>Los nombres de rutas también están internacionalizados.</p><p>Si estás usando el idioma predeterminado, inglés, verás <code>/en/pathnames</code> en la barra de direcciones del navegador en esta página.</p><p>Si cambias el idioma a español, la URL se localiza en consecuencia (<code>/es/nombres-de-rutas</code>).</p>",
-    "title": "Nombres de rutas"
   }
 }
