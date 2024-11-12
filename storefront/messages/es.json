@@ -21,5 +21,9 @@
   "NotFoundPage": {
     "description": "Por favor, revisa la barra de direcciones del navegador o usa la navegación para ir a una página conocida.",
     "title": "Página no encontrada"
+  },
+
+  "Navigation": {
+
   }
 }
