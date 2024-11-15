@@ -1,5 +1,6 @@
 'use client';
-import React from 'react';
+import React,{ useEffect } from 'react';
+import { useFormState } from 'react-dom'
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -7,12 +8,35 @@ import { PersonIcon } from '@radix-ui/react-icons';
 import { useLocale } from 'next-intl';
 import { Input } from '@/components/ui/mf';
 import { Button } from '@/components/ui/button';
+
+
+//importaciones nuevas
+import { getMessageFromCode } from "@/lib/utils";
+import { authenticate } from '@/lib/actions';
+
+
 export default function LoginPage() {
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
     const locale = useLocale();
+    const [result, dispatch] = useFormState(authenticate, undefined);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+    useEffect(() => {
+        console.log('RESULT',result);
+        if (result) {
+          if (result.type === "error") {
+            const errorMessage = getMessageFromCode(result.resultCode)
+                console.log(errorMessage)
+          } else {
+            const errorMessage = getMessageFromCode(result.resultCode)
+            console.log(errorMessage);
+            router.refresh();
+          }
+        }
+      }, [result, router]);
+
+    /*const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const loginEmail = formData.get('email') as string;
@@ -33,7 +57,7 @@ export default function LoginPage() {
             setError(null);
             router.push(`/${locale}/admin`); //Redirige al dashboard después del login
         }
-    };
+    };*/
 
     return (
         <div className="flex flex-col justify-center items-center h-screen">
@@ -43,7 +67,7 @@ export default function LoginPage() {
                 </div>
                 <h2 className="flex flex-row text-2xl">Login</h2>
                 <form
-                    onSubmit={handleSubmit}
+                    action={dispatch}
                     className="flex flex-col justify-center w-full"
                 >
                     <Input

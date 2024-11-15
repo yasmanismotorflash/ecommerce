@@ -1,0 +1,25 @@
+{
+  "Error": {
+    "description": "<p>Desafortunadamente, hemos encontrado un error.</p><p>Puedes intentar <retry>recargar la página</retry> que estabas visitando.</p>",
+    "title": "¡Algo salió mal!"
+  },
+  "IndexPage": {
+    "description": "Este es un ejemplo básico que demuestra el uso de <code>next-intl</code> con el App Router de Next.js. Intenta cambiar el idioma en la esquina superior derecha y observa cómo cambia el contenido.",
+    "title": "Tienda"
+  },
+  "LocaleLayout": {
+    "title": "Ejemplo de next-intl"
+  },
+  "LocaleSwitcher": {
+    "label": "Cambiar idioma",
+    "locale": "{locale, select, es {🇪🇸 Español} en {🇺🇸 Inglés} other {Desconocido}}"
+  },
+  "Navigation": {
+    "home": "Inicio",
+    "pathnames": "Nombres de rutas"
+  },
+  "NotFoundPage": {
+    "description": "Por favor, revisa la barra de direcciones del navegador o usa la navegación para ir a una página conocida.",
+    "title": "Página no encontrada"
+  }
+}

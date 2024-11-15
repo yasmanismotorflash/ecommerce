@@ -13,7 +13,7 @@ export default function PageResultLayout({children, title}: Props) {
           <div className="flex flex-col lg:flex-row gap-6">
 
               <div className="flex-1">
-                  <h2 className="text-2xl font-semibold mb-4">Listado de Coches en Venta</h2>
+                  <h2 className="text-2xl font-semibold mb-4">{title}</h2>
                   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                       <div className="bg-white shadow-lg rounded-lg p-4">
