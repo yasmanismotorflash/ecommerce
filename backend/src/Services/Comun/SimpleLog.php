@@ -1,7 +1,5 @@
 <?php
-namespace App\Services;
-
-use App\Services\MfServices;
+namespace App\Services\Comun;
 
 /***
  * Servicio para facilitar el trabajo con los logs,
@@ -35,7 +33,7 @@ class SimpleLog
 
     public function __construct()
     {
-        $this->location = dirname(__DIR__,2).'/var/log/';
+        $this->location = dirname(__DIR__,3).'/var/log/';
         $this->logFile = 'default';
         $this->dateOnName = true;
     }
@@ -58,10 +56,6 @@ class SimpleLog
         if ($defaultLocation)
         {
             $this->location = dirname(__DIR__, 3) . '/var/log/';
-
-            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-                $this->location = dirname(__DIR__, 3) . '\var\log\\';
-            }
 
             if (!file_exists($this->location)) {
                 if (!mkdir($this->location, 0777, true) && !is_dir($this->location)) {
@@ -105,6 +99,8 @@ class SimpleLog
         return $this->logFile;
     }
 
+
+
     /**
      * Establecer el archivo de log
      * @param string $logFile    debeser la ruta completaal archivo
@@ -115,6 +111,8 @@ class SimpleLog
         $this->logFile = $logFile;
         return $this;
     }
+
+
 
     public function log($message, $level = 'INFO', $onlyText=false, $noEoL = false): SimpleLog
     {
@@ -137,11 +135,14 @@ class SimpleLog
         return $this;
     }
 
+
+
     public function info($message): SimpleLog
     {
         $this->log($message, 'INFO');
         return $this;
     }
+
 
     public function warn($message): SimpleLog
     {
@@ -150,11 +151,15 @@ class SimpleLog
     }
 
 
+
+
     public function error($message): SimpleLog
     {
         $this->log($message, 'ERROR');
         return $this;
     }
+
+
 
     public function addline(string $charactert='-',$long = 80): SimpleLog
     {
