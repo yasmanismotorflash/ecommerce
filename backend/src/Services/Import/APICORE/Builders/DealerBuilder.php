@@ -41,7 +41,7 @@ class  DealerBuilder
             // ToDo: Crear entidad con todos los datos disponibles en el arreglo
 
             $dealer = new Dealer();
-            $dealer->addSite($site);
+            $dealer->setSite($site);
 
             if(isset($data['id'])) { $dealer->setMfid($data['id']);}
             if(isset($data['name'])) { $dealer->setName($data['name']);}

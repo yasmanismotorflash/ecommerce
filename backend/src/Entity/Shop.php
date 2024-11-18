@@ -67,17 +67,14 @@ class Shop
     #[ORM\OneToMany(targetEntity: Advertisement::class, mappedBy: 'shop', orphanRemoval: true)]
     private Collection $advertisements;
 
-    /**
-     * @var Collection<int, Site>
-     */
-    #[ORM\ManyToMany(targetEntity: Site::class, mappedBy: 'shops')]
-    private Collection $sites;
+    #[ORM\ManyToOne(inversedBy: 'shops')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Site $site = null;
 
 
     public function __construct()
     {
         $this->advertisements = new ArrayCollection();
-        $this->sites = new ArrayCollection();
     }
 
 
@@ -368,30 +365,14 @@ class Shop
         return $this;
     }
 
-    /**
-     * @return Collection<int, Site>
-     */
-    public function getSites(): Collection
+    public function getSite(): Site
     {
-        return $this->sites;
+        return $this->site;
     }
 
-    public function addSite(Site $site): static
+    public function setSite(Site $site): static
     {
-        if (!$this->sites->contains($site)) {
-            $this->sites->add($site);
-            $site->addShop($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSite(Site $site): static
-    {
-        if ($this->sites->removeElement($site)) {
-            $site->removeShop($this);
-        }
-
+        $this->site = $site;
         return $this;
     }
 

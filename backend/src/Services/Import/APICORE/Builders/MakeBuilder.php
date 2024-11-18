@@ -40,7 +40,7 @@ class  MakeBuilder
 
             $make = new Make();
 
-            $make->addSite($site);
+            $make->setSite($site);
             $make->setName($data);
 
             //  ToDo: Validar si el dealer está en el sitio especificado, si no está agregarlo

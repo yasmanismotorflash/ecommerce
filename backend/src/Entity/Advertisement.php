@@ -201,11 +201,12 @@ class Advertisement
     #[ORM\JoinColumn(nullable: false)]
     private ?Shop $shop = null;
 
-    /**
-     * @var Collection<int, Site>
-     */
-    #[ORM\ManyToMany(targetEntity: Site::class, mappedBy: 'advertisements')]
-    private Collection $sites;
+
+
+    #[ORM\ManyToOne(inversedBy: 'advertisements')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Site $site = null;
+
 
     #[ORM\ManyToOne(inversedBy: 'advertisements')]
     private ?Make $make = null;
@@ -232,9 +233,7 @@ class Advertisement
 
     public function __construct()
     {
-        $this->sites = new ArrayCollection();
         $this->images = new ArrayCollection();
-
     }
 
 
@@ -762,30 +761,14 @@ class Advertisement
         return 'Anuncio: '.$this->mfid.' Marca: '.$this->make.' Modelo: '.$this->model.' Version: '.$this->version;
     }*/
 
-    /**
-     * @return Collection<int, Site>
-     */
-    public function getSites(): Collection
+    public function getSite(): Site
     {
-        return $this->sites;
+        return $this->site;
     }
 
-    public function addSite(Site $site): static
+    public function setSite(Site $site): static
     {
-        if (!$this->sites->contains($site)) {
-            $this->sites->add($site);
-            $site->addAdvertisement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSite(Site $site): static
-    {
-        if ($this->sites->removeElement($site)) {
-            $site->removeAdvertisement($this);
-        }
-
+        $this->site = $site;
         return $this;
     }
 

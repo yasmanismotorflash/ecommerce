@@ -31,7 +31,7 @@ La estructura del proyecto es la siguiente:
 
 - **Frontend**:
   - Next.js (para Storefront y Admin)
-  - Node.js (versión 20.18 )
+  - Node.js (versión 20.18)
 
 - **Backend**:
   - Symfony (PHP 8.3)
@@ -95,11 +95,11 @@ El contenedor de MySQL estará corriendo en `localhost` en el puerto `3308`. Las
 
 ### 6. Trabajo con Storefront
 
-En storefront se encuentra una prueba de concepto aun sin terminar, no se ha puesto el footer y aun se considera la posibilidad de incluir otras secciones.
+En storefront se encuentra una prueba de concepto aun sin terminar, no se ha puesto el footer y aún se considera la posibilidad de incluir otras secciones.
 
 En la carpeta app se encuentra un archivo params.json que tiene datos de prueba que funcionan en lugar de una llamada real al backend. La idea es que cuando venga la respuesta del backend en forma de json se pueda sustituir el estático que usamos ahora por la mencionada respuesta. 
 
-La página inicial de storefront se forma mediante los datos proporcionado por params.json, por ejemplo existe un valor menu con los datos necesarios para formar el menu principal de la aplicación, esto sucede si el valor show_menú es igual a true, de esta forma se arma la página
+La página inicial de storefront se forma mediante los datos proporcionados por params.json, por ejemplo existe un valor menu con los datos necesarios para formar el menu principal de la aplicación, esto sucede si el valor show_menú es igual a true, de esta forma se arma la página
 
 Ya Storefront está configurado con Nx.
 
@@ -139,7 +139,7 @@ Las configuraciones personalizadas de PHP están en la carpeta `/docker/php/`. E
 
 ## Inicializar el backend
 
-- ### 1- Entrar al contenedos de php ejecutando el comando
+- ### 1- Entrar al contenedor de php ejecutando el comando
 
     docker exec -it backend_php bash
 
@@ -161,7 +161,7 @@ Las configuraciones personalizadas de PHP están en la carpeta `/docker/php/`. E
 
 Backend listo !!!
 
-  ### Credenciasles para autenticación
+  ### Credenciales para autenticación
   - usuario: admin@backend.local  
   - password: 123
 
@@ -195,5 +195,5 @@ Backend listo !!!
 
 ## Notas Adicionales
 
-- Asegúrate de que todos los contenedores estén corriendo correctamente antes de acceder a las URLs locales.
+- Asegúrate de que todos los contenedores estén corriendo correctamente antes de acceder a las URL locales.
 - Si necesitas ajustar las variables de entorno, puedes añadir un archivo `.env` en las carpetas `admin-front`, `storefront` o `backend` para configuraciones específicas de desarrollo y producción.

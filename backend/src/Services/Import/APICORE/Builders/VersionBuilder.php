@@ -24,7 +24,7 @@ class  VersionBuilder
     {
         if($data) {
             // ToDo: Actualizar entidad con todos los datos disponibles en el arreglo y llenar el registro de cambios
-            $version->addSite($site);
+            $version->setSite($site);
             $version->setModel($model);
             $version->setName($data);
             return $version;
@@ -40,7 +40,7 @@ class  VersionBuilder
             // ToDo: Crear entidad con todos los datos disponibles en el arreglo
 
             $version = new Version();
-            $version->addSite($site);
+            $version->setSite($site);
             $version->setModel($model);
             $version->setName($data);
 

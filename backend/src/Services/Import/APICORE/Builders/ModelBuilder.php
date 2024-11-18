@@ -25,7 +25,7 @@ class  ModelBuilder
     {
         if($data) {
             // ToDo: Actualizar entidad con todos los datos disponibles en el arreglo y llenar el registro de cambios
-            $model->addSite($site);
+            $model->setSite($site);
             $model->setMake($make);
             $model->setName($data);
             return $model;
@@ -41,7 +41,7 @@ class  ModelBuilder
             // ToDo: Crear entidad con todos los datos disponibles en el arreglo
 
             $model = new Model();
-            $model->addSite($site);
+            $model->setSite($site);
             $model->setMake($make);
             $model->setName($data);
 

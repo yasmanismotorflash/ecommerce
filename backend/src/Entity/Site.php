@@ -29,12 +29,6 @@ class Site
     private ?int $mfSiteId = null;
 
     #[ORM\Column(length: 200)]
-    private ?string $apimfClientId = null;
-
-    #[ORM\Column(length: 200)]
-    private ?string $apimfClientSecret = null;
-
-    #[ORM\Column(length: 200)]
     private ?string $apicoreClientId = null;
 
     #[ORM\Column(length: 200)]
@@ -48,44 +42,44 @@ class Site
     /**
      * @var Collection<int, Dealer>
      */
-    #[ORM\ManyToMany(targetEntity: Dealer::class, inversedBy: 'sites')]
+    #[ORM\OneToMany(targetEntity: Dealer::class, mappedBy: 'site')]
     private Collection $dealers;
 
     /**
      * @var Collection<int, Make>
      */
-    #[ORM\ManyToMany(targetEntity: Make::class, inversedBy: 'sites')]
+    #[ORM\OneToMany(targetEntity: Make::class, mappedBy: 'site')]
     private Collection $makes;
 
     /**
      * @var Collection<int, Shop>
      */
-    #[ORM\ManyToMany(targetEntity: Shop::class, inversedBy: 'sites')]
+    #[ORM\OneToMany(targetEntity: Shop::class, mappedBy: 'site')]
     private Collection $shops;
 
     /**
      * @var Collection<int, Model>
      */
-    #[ORM\ManyToMany(targetEntity: Model::class, inversedBy: 'sites')]
+    #[ORM\OneToMany(targetEntity: Model::class, mappedBy: 'site')]
     private Collection $models;
 
 
     /**
      * @var Collection<int, Advertisement>
      */
-    #[ORM\ManyToMany(targetEntity: Advertisement::class, inversedBy: 'sites')]
+    #[ORM\OneToMany(targetEntity: Advertisement::class, mappedBy: 'site')]
     private Collection $advertisements;
 
     /**
      * @var Collection<int, Version>
      */
-    #[ORM\ManyToMany(targetEntity: Version::class, inversedBy: 'sites')]
+    #[ORM\OneToMany(targetEntity: Version::class, mappedBy: 'site')]
     private Collection $versions;
 
     /**
      * @var Collection<int, Finish>
      */
-    #[ORM\ManyToMany(targetEntity: Finish::class, inversedBy: 'sites2')]
+    #[ORM\OneToMany(targetEntity: Finish::class, mappedBy: 'site')]
     private Collection $finishs;
 
 
@@ -100,7 +94,6 @@ class Site
         $this->advertisements = new ArrayCollection();
         $this->finishs = new ArrayCollection();
     }
-
 
 
 
@@ -132,27 +125,6 @@ class Site
         return $this;
     }
 
-    public function getApimfClientId(): ?string
-    {
-        return $this->apimfClientId;
-    }
-
-    public function setApimfClientId(string $apimfClientId): static
-    {
-        $this->apimfClientId = $apimfClientId;
-        return $this;
-    }
-
-    public function getApimfClientSecret(): ?string
-    {
-        return $this->apimfClientSecret;
-    }
-
-    public function setApimfClientSecret(string $apimfClientSecret): static
-    {
-        $this->apimfClientSecret = $apimfClientSecret;
-        return $this;
-    }
 
     public function getApicoreClientId(): ?string
     {
@@ -175,7 +147,6 @@ class Site
         $this->apicoreClientSecret = $apicoreClientSecret;
         return $this;
     }
-
 
 
     public function getMfSiteId(): ?int
@@ -220,7 +191,6 @@ class Site
     public function removeAdvertisement(Advertisement $advertisement): static
     {
         $this->advertisements->removeElement($advertisement);
-
         return $this;
     }
 
@@ -244,7 +214,6 @@ class Site
     public function removeDealer(Dealer $dealer): static
     {
         $this->dealers->removeElement($dealer);
-
         return $this;
     }
 
@@ -268,7 +237,6 @@ class Site
     public function removeMake(Make $make): static
     {
         $this->makes->removeElement($make);
-
         return $this;
     }
 
@@ -285,14 +253,12 @@ class Site
         if (!$this->shops->contains($shop)) {
             $this->shops->add($shop);
         }
-
         return $this;
     }
 
     public function removeShop(Shop $shop): static
     {
         $this->shops->removeElement($shop);
-
         return $this;
     }
 
@@ -316,7 +282,6 @@ class Site
     public function removeModel(Model $model): static
     {
         $this->models->removeElement($model);
-
         return $this;
     }
 
@@ -340,7 +305,6 @@ class Site
     public function removeVersion(Version $version): static
     {
         $this->versions->removeElement($version);
-
         return $this;
     }
 
@@ -357,14 +321,12 @@ class Site
         if (!$this->finishs->contains($finish)) {
             $this->finishs->add($finish);
         }
-
         return $this;
     }
 
     public function removeFinish(Finish $finish): static
     {
         $this->finishs->removeElement($finish);
-
         return $this;
     }
 

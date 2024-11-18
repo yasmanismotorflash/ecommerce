@@ -21,11 +21,9 @@ class Make
     #[ORM\OneToMany(targetEntity: Model::class, mappedBy: 'make')]
     private Collection $models;
 
-    /**
-     * @var Collection<int, Site>
-     */
-    #[ORM\ManyToMany(targetEntity: Site::class, mappedBy: 'makes')]
-    private Collection $sites;
+    #[ORM\ManyToOne(inversedBy: 'makes')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Site $site = null;
 
     /**
      * @var Collection<int, Advertisement>
@@ -38,7 +36,6 @@ class Make
 
     public function __construct()
     {
-        $this->sites = new ArrayCollection();
         $this->models = new ArrayCollection();
         $this->advertisements = new ArrayCollection();
     }
@@ -86,30 +83,14 @@ class Make
         return $this->name;
     }
 
-    /**
-     * @return Collection<int, Site>
-     */
-    public function getSites(): Collection
+    public function getSite(): Site
     {
-        return $this->sites;
+        return $this->site;
     }
 
-    public function addSite(Site $site): static
+    public function setSite(Site $site): static
     {
-        if (!$this->sites->contains($site)) {
-            $this->sites->add($site);
-            $site->addMake($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSite(Site $site): static
-    {
-        if ($this->sites->removeElement($site)) {
-            $site->removeMake($this);
-        }
-
+        $this->site = $site;
         return $this;
     }
 

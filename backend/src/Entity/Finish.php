@@ -28,16 +28,13 @@ class Finish
     #[ORM\OneToMany(targetEntity: Advertisement::class, mappedBy: 'version')]
     private Collection $advertisements;
 
-    /**
-     * @var Collection<int, Site>
-     */
-    #[ORM\ManyToMany(targetEntity: Site::class, mappedBy: 'finishs')]
-    private Collection $sites;
+    #[ORM\ManyToOne(inversedBy: 'advertisements')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Site $site = null;
 
 
     public function __construct() {
         $this->advertisements = new ArrayCollection();
-        $this->sites = new ArrayCollection();
     }
 
 
@@ -121,30 +118,14 @@ class Finish
         return $this;
     }
 
-    /**
-     * @return Collection<int, Site>
-     */
-    public function getSites(): Collection
+    public function getSite(): Site
     {
-        return $this->sites;
+        return $this->site;
     }
 
-    public function addSite(Site $site): static
+    public function setSite(Site $site): static
     {
-        if (!$this->sites->contains($site)) {
-            $this->sites->add($site);
-            $site->addFinish($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSite(Site $site): static
-    {
-        if ($this->sites->removeElement($site)) {
-            $site->removeFinish($this);
-        }
-
+        $this->site = $site;
         return $this;
     }
 

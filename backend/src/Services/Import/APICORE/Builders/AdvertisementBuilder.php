@@ -33,7 +33,7 @@ class AdvertisementBuilder
         if(AdvertisementBuilder::validateArray($data)) {
             // ToDo: Actualizar entidad con todos los datos disponibles en el arreglo y llenar el registro de cmabios
 
-            $advertisement->addSite($site);
+            $advertisement->setSite($site);
 
             if(isset($data['id'])) { $advertisement->setMfid($data['id']);}
             if(isset($data['published'])) { $advertisement->setPublished($data['published']);}
@@ -124,7 +124,7 @@ class AdvertisementBuilder
 
              $advertisement = new Advertisement();
 
-             $advertisement->addSite($site);
+             $advertisement->setSite($site);
 
              if(isset($data['id'])) { $advertisement->setMfid($data['id']);}
              if(isset($data['published'])) { $advertisement->setPublished($data['published']);}
