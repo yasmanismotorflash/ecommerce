@@ -1,6 +1,6 @@
-import {useTranslations} from 'next-intl';
+//import {useTranslations} from 'next-intl';
 import {ReactNode} from 'react';
-import ExternalLink from '../../../ExternalLink';
+//import ExternalLink from '../../../ExternalLink';
 
 type Props = {
   children?: ReactNode;
@@ -8,7 +8,8 @@ type Props = {
 };
 
 export default function PageResultLayout({children, title}: Props) {
-  return (
+    console.log(children,title)
+    return (
       <div className="container mx-auto p-6">
           <div className="flex flex-col lg:flex-row gap-6">
 
