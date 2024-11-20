@@ -21,7 +21,7 @@ class DF01_ConfigValuesFixtures extends Fixture implements OrderedFixtureInterfa
         //---Crear usuarios----------------------------------------------------------------------------
         $configValues = [
             //---APIMF-CONFIGURACION
-            ['string', 'API-CORE-URL', 'https://apimf.motorflash.com'],
+            ['string', 'API-CORE-URL', 'http://apicore.local:8080'],
         ];
 
         foreach ($configValues as $cfgValue) {

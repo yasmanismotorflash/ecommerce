@@ -21,10 +21,8 @@ class DF03_SitesFixtures extends Fixture implements OrderedFixtureInterface
                 'name'=>'DaswelAuto',
                 'url'=>'www.daswellauto.es',
                 'mfSiteId'=>67,
-                'apicoreClientId'=>'site1',
-                'apicoreClientSecret'=>'874cfb54d9bacdace371ffccc80d598bdbddfdtjyhf',
-                'apimfClientId'=>'',
-                'apimfClientSecret'=>'',
+                'apicoreClientId'=>'user@apicore.local',
+                'apicoreClientSecret'=>'456',
                 'active'=>true
             ]
         ];
@@ -36,8 +34,6 @@ class DF03_SitesFixtures extends Fixture implements OrderedFixtureInterface
                 ->setMfSiteId($site['mfSiteId'])
                 ->setApicoreClientId($site['apicoreClientId'])
                 ->setApicoreClientSecret($site['apicoreClientSecret'])
-                ->setApimfClientId($site['apimfClientId'])
-                ->setApimfClientSecret($site['apimfClientSecret'])
                 ->setActive($site['active']);
 
             $manager->persist($newSite);

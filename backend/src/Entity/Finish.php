@@ -16,7 +16,7 @@ class Finish
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\ManyToOne(targetEntity: Model::class, inversedBy: 'versions')]
+    #[ORM\ManyToOne(targetEntity: Model::class)]
     private Model $model;
 
     #[ORM\Column(type: 'string', name: 'name',length: 50, options: ["comment" => "Campo nombre visible del acabado"])]
@@ -25,10 +25,10 @@ class Finish
     /**
      * @var Collection<int, Advertisement>
      */
-    #[ORM\OneToMany(targetEntity: Advertisement::class, mappedBy: 'version')]
+    #[ORM\OneToMany(targetEntity: Advertisement::class, mappedBy: 'finish')]
     private Collection $advertisements;
 
-    #[ORM\ManyToOne(inversedBy: 'advertisements')]
+    #[ORM\ManyToOne(inversedBy: 'finishs')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Site $site = null;
 

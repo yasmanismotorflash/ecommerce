@@ -53,8 +53,8 @@ class APICOREClient
      */
     private function getToken(): void
     {
-        $endpoint = $this->apiCOreUrl . '/api/token';
-        $payload = ['client_id' => $this->apiCoreClientId, 'client_secret' => $this->apiCoreClientSecret];
+        $endpoint = $this->apiCoreUrl . '/auth';
+        $payload = ['email' => $this->apiCoreClientId, 'password' => $this->apiCoreClientSecret];
         $response = $this->httpClient->request('POST', $endpoint, ['json' => $payload]);
         $this->debug('Solicitando Token de acceso');
 
