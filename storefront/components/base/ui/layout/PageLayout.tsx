@@ -1,6 +1,6 @@
-import {useTranslations} from 'next-intl';
+//import {useTranslations} from 'next-intl';
 import {ReactNode} from 'react';
-import ExternalLink from '../../../ExternalLink';
+//import ExternalLink from '../../../ExternalLink';
 
 type Props = {
   children?: ReactNode;
@@ -8,6 +8,7 @@ type Props = {
 };
 
 export default function PageLayout({children, title}: Props) {
+    console.log(children)
   return (
       <div className="relative flex grow flex-col bg-slate-850 py-36">
           <div className="absolute inset-0 overflow-hidden">

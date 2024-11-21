@@ -1,4 +1,4 @@
-import {useTranslations} from 'next-intl';
+//import {useTranslations} from 'next-intl';
 import {ReactNode} from 'react';
 import {cardData} from '@/components/data/card-data';
 import { Card } from '@/components/ui/mf';
@@ -7,10 +7,11 @@ import Filters from '@/components/ui/mf/filter';
 type Props = {
   children?: ReactNode;
   title: ReactNode;
+  searchParams?:{[key:string]:string};
 };
 
 export default function PageResultLayout({children, title}: Props) {
-    
+  console.log(children,title);
   return (
       <div className="container mx-auto p-6">
           <div className="flex flex-col lg:flex-row gap-6">

@@ -1,15 +1,18 @@
-import createMiddleware from 'next-intl/middleware';
-import {routing} from '../i18n/routing';
+
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 //export default createMiddleware(routing);
 
-export default function middleware(request: NextRequest) {
-    // Add a new header x-current-path which passes the path to downstream components
-    const headers = new Headers(request.headers);
-    headers.set("x-current-path", request.nextUrl.pathname);
-    return NextResponse.next({ headers });
+export default function middleware(req: NextRequest) {
+    const acceptLanguage = req.headers.get("accept-language") || "";
+    const preferredLanguage = acceptLanguage.split(",")[0]; // Ejemplo: "es-ES"
+  
+    // Puedes agregar el idioma como header o cookie
+    const response = NextResponse.next();
+    response.cookies.set("preferred-language", preferredLanguage);
+  
+    return response;
   }
 
 export const config = {

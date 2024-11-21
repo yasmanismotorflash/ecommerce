@@ -2,7 +2,6 @@
 import {setRequestLocale} from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import PageResultLayout from "@/components/results/layout/PageResultLayout";
-import {cardData} from '@/components/data/card-data';
 
 type Params = Promise<{ locale: string }>
 
@@ -11,7 +10,7 @@ export default async function DefaultPage({params,searchParams}: {
     searchParams: {[key:string]:string}
 }) {
     const {locale} = await params;
-    const search = await searchParams;
+    const search = searchParams;
     console.log('SEARCH',Object.keys(search).length)
 
 
@@ -21,7 +20,7 @@ export default async function DefaultPage({params,searchParams}: {
     const t = await getTranslations('IndexPage');
 
     return (
-        <PageResultLayout title={t('title')}>
+        <PageResultLayout title={t('title')} searchParams={searchParams}>
             <p className="max-w-[590px]">
                 {t.rich('description', {
                     code: (chunks) => (

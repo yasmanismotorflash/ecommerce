@@ -1,7 +1,8 @@
 'use client'
 import { Advertisement } from "@/interfaces";
 import useFilterStore from "@/store/filtersStore";
-import { ReactHTMLElement, useState } from 'react';
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
 
 
 
@@ -11,13 +12,25 @@ interface Props{
 
 export default function Filters({items}:Props) {
 
+    const {filters, setFilters, url, setUrl} = useFilterStore();
+
+
+    const router = useRouter();
+
+    useEffect(()=>{
+        router.push(`${url}`);
+    },[url,router])
+
+    useEffect(()=>{
+            setUrl();
+    },[filters])
+
     const [formData, setFormData] = useState({
         brand: '',
         model: '',
         price: ''
       });
 
-    const {filters, setFilters, url, setUrl} = useFilterStore();
 
     const [models,setModels] = useState<string[]>([])
     
@@ -37,14 +50,15 @@ export default function Filters({items}:Props) {
     
 
 
-    const handleOnChange=(event:any)=>{
+    const handleOnChange=(event:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
 
         const { name, value } = event.target;
-
-        setFormData({
-            ...formData,
-            [name]: value
-        });
+        if (value!=''){
+            setFormData({
+                ...formData,
+                [name]: value
+            });
+        }
 
         if (event.target.name==='brand'){
             const brand = event.target.value;
@@ -60,11 +74,19 @@ export default function Filters({items}:Props) {
         }
     }
 
-    const handleSubmit=(e:React.FormEvent)=>{
+    const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        
 
-        console.log(formData)
+        console.log('FORMDATA',formData);
+
+        let filterStr = '';
+
+        Object.entries(formData).forEach(([key,value])=>{
+            if (value.length>0)
+                filterStr+=`${filters}${key}=${value}&`
+        })
+        
+        setFilters(filterStr);
     }
 
   return (
