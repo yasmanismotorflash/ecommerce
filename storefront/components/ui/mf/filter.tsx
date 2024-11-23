@@ -3,6 +3,8 @@ import { Advertisement } from "@/interfaces";
 import useFilterStore from "@/store/filtersStore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from 'react';
+import DoubleRangeSlider  from './doubleRangeSlider';
+import { Range } from 'react-range';
 
 
 
@@ -28,11 +30,13 @@ export default function Filters({items}:Props) {
     const [formData, setFormData] = useState({
         brand: '',
         model: '',
+        color:'',
         price: ''
       });
 
 
     const [models,setModels] = useState<string[]>([])
+    const [colors,setColors] = useState<string[]>([])
     
     const getBrands=(items:Advertisement[])=>{
         const brandsArray:string[] = [];
@@ -63,16 +67,29 @@ export default function Filters({items}:Props) {
         if (event.target.name==='brand'){
             const brand = event.target.value;
             const arrayModels:string[]=[];
+            const arrayColors:string[]=[];
             
             items.map((item)=>{
+                
                 if (brand===item.brand&&!arrayModels.find((model)=>model===item.model)){
-                    arrayModels.push(item.model)
+                    arrayModels.push(item.model);
                 }
+
+                if (brand===item.brand&&!arrayColors.find((color)=>color===item.color)){
+                    arrayColors.push(item.color);
+                }
+
             })
-            setModels(arrayModels)
-            console.log(arrayModels)
+
+            setModels(arrayModels);
+            setColors(arrayColors);
+            console.log(arrayModels);
         }
     }
+
+    const handleRangeChange = (range: [number, number]) => {
+        console.log("Rango seleccionado:", range);
+    };
 
     const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
@@ -85,7 +102,7 @@ export default function Filters({items}:Props) {
             if (value.length>0)
                 filterStr+=`${filters}${key}=${value}&`
         })
-        
+        console.log(DoubleRangeSlider.values)
         setFilters(filterStr);
     }
 
@@ -114,12 +131,21 @@ export default function Filters({items}:Props) {
         </div>
 
         <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">Color</label>
+            <select name="color" className="w-full p-2 border border-gray-300 rounded" onChange={handleOnChange}>
+                <option>Seleccione un color</option>
+                {
+                    colors.map((item)=><option key={item}>{item}</option>)
+                }
+            </select>
+        </div>
+
+           
+
+        <div className="mb-4">
             <label className="block text-gray-700 font-semibold mb-2">Precio</label>
-            <input name="price" type="range" min="5000" max="50000" className="w-full" onChange={handleOnChange}/>
-            <div className="flex justify-between text-gray-600 text-sm">
-                <span>$5,000</span>
-                <span>$50,000</span>
-            </div>
+            <DoubleRangeSlider   min={0}  max={15000} onRangeChange={handleRangeChange}/>
+
         </div>
 
         <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" type="submit">
